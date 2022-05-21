@@ -40,7 +40,7 @@ public class CityController {
     @GetMapping(path = "/", produces = "application/json")
     public ResponseEntity<List<CityDto>> allCities (Pageable pageable) {
         Page page = cityService.getAll(pageable);
-        return Conf.Response(page);
+        return Conf.response(page);
     }
 }
 

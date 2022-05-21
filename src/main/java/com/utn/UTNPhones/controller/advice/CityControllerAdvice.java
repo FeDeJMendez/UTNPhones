@@ -2,6 +2,7 @@ package com.utn.UTNPhones.controller.advice;
 
 import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.utn.UTNPhones.exceptions.CityExistsException;
+import com.utn.UTNPhones.exceptions.CityIsRequiredException;
 import com.utn.UTNPhones.exceptions.CityNoExistsException;
 import com.utn.UTNPhones.exceptions.ErrorBody;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,16 @@ public class CityControllerAdvice {
                 .message("THE CITY NO EXISTS")
                 .build(),
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(value = {CityIsRequiredException.class})
+    protected ResponseEntity<ErrorBody> cityIsRequired () {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .message("THE CITY IS REQUIRED")
+                .build()
+                ,HttpStatus.NOT_FOUND
         );
     }
 }

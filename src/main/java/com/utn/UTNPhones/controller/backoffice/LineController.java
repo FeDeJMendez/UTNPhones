@@ -42,6 +42,6 @@ public class LineController {
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<LineDto>> allLines(Pageable pageable){
         Page<Line> page = lineService.getAll(pageable);
-        return Conf.Response(page);
+        return Conf.response(page);
     }
 }

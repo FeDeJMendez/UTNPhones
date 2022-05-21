@@ -18,10 +18,11 @@ public class LineService {
     }
 
 
-    public Line addLine(Line line)
+    public Line addLine(Line newLine)
             throws LineExistsException {
-        if (!lineRepository.existsByNumber(line.getNumber())){
-            return lineRepository.save(line);
+        if (!lineRepository.existsByNumber(newLine.getNumber())){
+            newLine.setStatus(false);
+            return lineRepository.save(newLine);
         }
         else throw new LineExistsException();
     }

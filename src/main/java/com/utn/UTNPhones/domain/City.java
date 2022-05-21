@@ -34,4 +34,10 @@ public class City implements URIInterface {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private List<Line> lines;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+    private List<Rate> origins;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
+    private List<Rate> destinations;
 }

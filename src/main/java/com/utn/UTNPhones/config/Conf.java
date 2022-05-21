@@ -27,7 +27,7 @@ public class Conf {
     }
 
     ///// Structure for return a lot of data /////
-    public static ResponseEntity Response(Page page) {
+    public static ResponseEntity response(Page page) {
         HttpStatus httpStatus = page.getContent().isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
         return ResponseEntity.
                 status(httpStatus).

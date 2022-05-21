@@ -48,6 +48,6 @@ public class ClientController {
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<ClientDto>> allClients(Pageable pageable) {
         Page<Client> page = clientService.getAll(pageable);
-        return Conf.Response(page);
+        return Conf.response(page);
     }
 }
