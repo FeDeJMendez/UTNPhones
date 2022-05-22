@@ -51,6 +51,8 @@ public class CityDto {
                 prefix(city.getPrefix()).
                 province(ProvinceDto.from(city.getProvince())).
                 lines(linesDto).
+                origins(originsDto).
+                destinations(destinationsDto).
                 build();
     }
 }

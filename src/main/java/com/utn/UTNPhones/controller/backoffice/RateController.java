@@ -34,8 +34,8 @@ public class RateController {
     ///// Add new Rate /////
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity newRate (@RequestBody @Validated final RateDto rateDto)
-            throws RateTimeRangeInUseException, RatePriceNegativeException, CityNoExistsException,
-            CityIsRequiredException, RatePriceIsRequiredException, RateTimeRangeIsRequiredException {
+            throws CityIsRequiredException, RatePriceIsRequiredException, RateTimeRangeIsRequiredException,
+            RateTimeRangeInUseException, RatePriceNegativeException, CityNoExistsException {
         if ((rateDto.getOrigin() == null) || (rateDto.getDestination() == null))
             throw new CityIsRequiredException();
         if (rateDto.getPrice() == null)

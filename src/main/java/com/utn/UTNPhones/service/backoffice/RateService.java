@@ -4,7 +4,6 @@ import com.utn.UTNPhones.domain.Rate;
 import com.utn.UTNPhones.exceptions.CityNoExistsException;
 import com.utn.UTNPhones.exceptions.RatePriceNegativeException;
 import com.utn.UTNPhones.exceptions.RateTimeRangeInUseException;
-import com.utn.UTNPhones.repository.CityRepository;
 import com.utn.UTNPhones.repository.RateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

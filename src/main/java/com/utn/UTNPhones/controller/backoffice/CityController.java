@@ -5,7 +5,6 @@ import com.utn.UTNPhones.domain.City;
 import com.utn.UTNPhones.dto.CityDto;
 import com.utn.UTNPhones.exceptions.CityExistsException;
 import com.utn.UTNPhones.service.backoffice.CityService;
-import com.utn.UTNPhones.utils.URIInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

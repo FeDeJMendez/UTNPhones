@@ -1,6 +1,5 @@
 package com.utn.UTNPhones.controller.advice;
 
-import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.utn.UTNPhones.exceptions.CityExistsException;
 import com.utn.UTNPhones.exceptions.CityIsRequiredException;
 import com.utn.UTNPhones.exceptions.CityNoExistsException;

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Builder
@@ -30,4 +31,10 @@ public class Line implements URIInterface {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
+    private List<Call> origins;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
+    private List<Call> destinations;
 }

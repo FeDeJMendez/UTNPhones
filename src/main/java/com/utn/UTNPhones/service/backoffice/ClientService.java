@@ -5,9 +5,7 @@ import com.utn.UTNPhones.domain.Line;
 import com.utn.UTNPhones.exceptions.ClientExistsException;
 import com.utn.UTNPhones.exceptions.LineBadDataException;
 import com.utn.UTNPhones.exceptions.LineNoExistsException;
-import com.utn.UTNPhones.exceptions.LineRequiredException;
 import com.utn.UTNPhones.repository.ClientRepository;
-import com.utn.UTNPhones.repository.LineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +14,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClientService {
     private final ClientRepository clientRepository;
-    private final LineRepository lineRepository;
+    private final LineService lineService;
 
     @Autowired
-    public ClientService(ClientRepository clientRepository, LineRepository lineRepository) {
+    public ClientService(ClientRepository clientRepository, LineService lineService) {
         this.clientRepository = clientRepository;
-        this.lineRepository = lineRepository;
+        this.lineService = lineService;
     }
 
     public Client addClient(Client client)
@@ -32,11 +30,9 @@ public class ClientService {
         if (line != null){
             Line newLine = new Line();
             if(line.getId() != null)
-                newLine = lineRepository.findById(line.getId())
-                        .orElseThrow(LineNoExistsException::new);
+                newLine = lineService.getById(line.getId());
             else if (line.getNumber() != null)
-                newLine = lineRepository.findByNumber(line.getNumber())
-                        .orElseThrow(LineNoExistsException::new);
+                newLine = lineService.getByNumber(line.getNumber());
             else throw new LineBadDataException();
             client.setLine(newLine);
         }
