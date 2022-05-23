@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/backoffice/rates")
+@RequestMapping(value = "/api/backoffice/rates")
 public class RateController {
     private final RateService rateService;
     private final CityService cityService;

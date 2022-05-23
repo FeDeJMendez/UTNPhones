@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/backoffice/calls")
+@RequestMapping(value = "/api/backoffice/calls")
 public class CallController {
     private final CallService callService;
     private final ModelMapper modelMapper;
