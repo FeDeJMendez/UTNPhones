@@ -1,10 +1,10 @@
 package com.utn.UTNPhones.domain.enums;
 
 public enum Rol {
-    CLIENT/*("Client")*/,
-    BACKOFFICE/*("Employee")*/;
+    CLIENT("client"),
+    BACKOFFICE("backoffice");
 
-/*    private String description;
+    private String description;
 
     Rol(String description) {
         this.description = description;
@@ -12,7 +12,7 @@ public enum Rol {
 
     public static Rol find (final String value) {
         for (Rol r : values()) {
-            if (value.toString().equalsIgnoreCase(value)) {
+            if (r.toString().equalsIgnoreCase(value)) {
                 return r;
             }
         }
@@ -21,5 +21,5 @@ public enum Rol {
 
     public String getDescription() {
         return description;
-    }*/
+    }
 }

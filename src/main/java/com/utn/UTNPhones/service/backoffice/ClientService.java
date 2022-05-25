@@ -22,10 +22,10 @@ public class ClientService {
         this.lineService = lineService;
     }
 
-    public Client addClient(Client client)
+    public Client addClient(Client newClient)
             throws ClientExistsException, LineNoExistsException, LineBadDataException {
-        Line line = client.getLine();
-        if (clientRepository.existsByDni(client.getDni()))
+        Line line = newClient.getLine();
+        if (clientRepository.existsByDni(newClient.getDni()))
             throw new ClientExistsException();
         if (line != null){
             Line newLine = new Line();
@@ -34,9 +34,9 @@ public class ClientService {
             else if (line.getNumber() != null)
                 newLine = lineService.getByNumber(line.getNumber());
             else throw new LineBadDataException();
-            client.setLine(newLine);
+            newClient.setLine(newLine);
         }
-        return (Client)clientRepository.save(client);
+        return clientRepository.save(newClient);
     }
 
     public Page<Client> getAll(Pageable pageable) {
