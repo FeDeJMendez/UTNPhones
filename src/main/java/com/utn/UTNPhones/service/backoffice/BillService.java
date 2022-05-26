@@ -20,7 +20,7 @@ public class BillService {
     public Bill addBill(Bill newBill) {
         newBill.setPaid(false);
         newBill.setExpiration(newBill.getDate().plusDays(15));
-        newBill.setTotalPrice(newBill.getCostPrice() * 1.21);
+        newBill.setCostPrice(newBill.getTotalPrice() / 1.21);
         return billRepository.save(newBill);
     }
 

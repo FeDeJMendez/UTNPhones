@@ -22,7 +22,7 @@ public class LineService {
     public Line addLine(Line newLine)
             throws LineExistsException {
         if (!lineRepository.existsByNumber(newLine.getNumber())){
-            newLine.setStatus(false);
+            newLine.setStatus(true);
             return lineRepository.save(newLine);
         }
         else throw new LineExistsException();

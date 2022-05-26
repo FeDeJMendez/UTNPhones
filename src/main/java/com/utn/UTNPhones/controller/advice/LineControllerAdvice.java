@@ -48,4 +48,34 @@ public class LineControllerAdvice {
                 HttpStatus.NOT_FOUND
         );
     }
+
+    @ExceptionHandler(value = {LineEqualException.class})
+    protected ResponseEntity<ErrorBody> lineEqual() {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .message("CAN NOT CALL THE SAME LINE")
+                .build()
+                ,HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler(value = {LineOriginLowException.class})
+    protected ResponseEntity<ErrorBody> lineOriginLow() {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .message("YOUR LINE IS DISCONTINUED")
+                .build()
+                ,HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler(value = {LineDestinationLowException.class})
+    protected ResponseEntity<ErrorBody> lineDestinationLow() {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .message("THE DESTINATION LINE IS DISCONTINUED")
+                .build()
+                ,HttpStatus.CONFLICT
+        );
+    }
 }

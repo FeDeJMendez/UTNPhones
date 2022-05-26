@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CallDto {
     private Integer id;
-    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime start;
     private Integer duration;
     private Double total;

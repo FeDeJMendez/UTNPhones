@@ -3,9 +3,7 @@ package com.utn.UTNPhones.controller.backoffice;
 import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.dto.CallDto;
-import com.utn.UTNPhones.exceptions.CallDurationIsRequiredException;
-import com.utn.UTNPhones.exceptions.CallStartIsRequiredException;
-import com.utn.UTNPhones.exceptions.LineRequiredException;
+import com.utn.UTNPhones.exceptions.*;
 import com.utn.UTNPhones.service.backoffice.CallService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +30,8 @@ public class CallController {
     ///// Add New Call /////
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addCall (@RequestBody @Validated final CallDto callDto)
-            throws CallStartIsRequiredException, CallDurationIsRequiredException, LineRequiredException {
-        if ((callDto.getOrigin() == null) || (callDto.getDestination() == null))
-            throw new LineRequiredException();
-        if (callDto.getStart() == null)
-            throw new CallStartIsRequiredException();
-        if (callDto.getDuration() == null)
-            throw new CallDurationIsRequiredException();
+            throws CallStartIsRequiredException, CallDurationIsRequiredException, LineRequiredException,
+            LineEqualException, LineDestinationLowException, LineOriginLowException {
         Call newCall = callService.addCall(modelMapper.map(callDto, Call.class));
         return ResponseEntity.created(Conf.getLocation(newCall)).build();
     }
