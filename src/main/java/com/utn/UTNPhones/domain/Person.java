@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "persons")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type"/*, visible = true*/)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Client.class, name = "CLIENT"),

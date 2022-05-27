@@ -18,22 +18,22 @@ import java.time.LocalDateTime;
 public class CallDto {
     private Integer id;
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime start;
+    private LocalDateTime starttime;
     private Integer duration;
     private Double total;
     private Integer idBill;
-    private LineDto origin;
-    private LineDto destination;
+    private PhonelineDto origin;
+    private PhonelineDto destination;
 
     public static CallDto from ( Call call) {
         return CallDto.builder()
                 .id(call.getId())
-                .start(call.getStart())
+                .starttime(call.getStarttime())
                 .duration(call.getDuration())
                 .total(call.getTotal())
                 .idBill(call.getIdBill())
-                .origin(LineDto.from(call.getOrigin()))
-                .destination(LineDto.from(call.getDestination()))
+                .origin(PhonelineDto.from(call.getOrigin()))
+                .destination(PhonelineDto.from(call.getDestination()))
                 .build();
     }
 }

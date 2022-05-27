@@ -15,8 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "lines")
-public class Line implements URIInterface {
+@Table(name = "phonelines")
+public class Phoneline implements URIInterface {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

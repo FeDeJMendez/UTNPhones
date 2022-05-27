@@ -18,8 +18,8 @@ import java.time.LocalTime;
 public class RateDto {
     private Integer id;
     private Double price;
-    private LocalTime start;
-    private LocalTime end;
+    private LocalTime starttime;
+    private LocalTime endtime;
     private CityDto origin;
     private CityDto destination;
 
@@ -27,8 +27,8 @@ public class RateDto {
         return RateDto.builder()
                 .id(rate.getId())
                 .price(rate.getPrice())
-                .start(rate.getStart())
-                .end(rate.getEnd())
+                .starttime(rate.getStarttime())
+                .endtime(rate.getEndtime())
                 .origin(CityDto.from(rate.getOrigin()))
                 .destination(CityDto.from(rate.getDestination()))
                 .build();

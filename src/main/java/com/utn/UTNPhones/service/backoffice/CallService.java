@@ -19,20 +19,20 @@ public class CallService {
 
 
     public Call addCall(Call newCall)
-            throws LineRequiredException, LineEqualException, CallStartIsRequiredException,
-            CallDurationIsRequiredException, LineOriginLowException, LineDestinationLowException {
+            throws PhonelineRequiredException, PhonelineEqualException, CallStarttimeIsRequiredException,
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
         if ((newCall.getOrigin() == null) || (newCall.getDestination() == null))
-            throw new LineRequiredException();
+            throw new PhonelineRequiredException();
         if (newCall.getOrigin().getNumber() == newCall.getDestination().getNumber())
-            throw new LineEqualException();
-        if (newCall.getStart() == null)
-            throw new CallStartIsRequiredException();
+            throw new PhonelineEqualException();
+        if (newCall.getStarttime() == null)
+            throw new CallStarttimeIsRequiredException();
         if (newCall.getDuration() == null)
             throw new CallDurationIsRequiredException();
         if (!newCall.getOrigin().getStatus())
-            throw new LineOriginLowException();
+            throw new PhonelineOriginLowException();
         if (!newCall.getDestination().getStatus())
-            throw new LineDestinationLowException();
+            throw new PhonelineDestinationLowException();
         Double total = 0.0;
         newCall.setTotal(total);
         return callRepository.save(newCall);

@@ -22,19 +22,19 @@ public class Bill implements URIInterface {
     private Integer id;
 
     @Column
-    private Integer idClient;
+    private Integer dni;
 
     @Column
-    private Integer totalCalls;
+    private Integer totalcalls;
 
     @Column
-    private Double costPrice;
+    private Double costprice;
 
     @Column
-    private Double totalPrice;
+    private Double totalprice;
 
     @Column
-    private LocalDate date;
+    private LocalDate datecreation;
 
     @Column
     private LocalDate expiration;

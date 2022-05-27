@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.utn.UTNPhones.domain.Client;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @JsonTypeName("CLIENT")
 @EqualsAndHashCode(callSuper = true)
 public class ClientDto extends PersonDto{
-    private LineDto line;
+    private PhonelineDto phonelineDto;
 
     public static ClientDto from (Client client) {
         ClientDto clientDto = new ClientDto();
@@ -22,7 +21,7 @@ public class ClientDto extends PersonDto{
         clientDto.setName(client.getName());
         clientDto.setLastname(client.getLastname());
         clientDto.setDni(client.getDni());
-        clientDto.setLine(LineDto.from(client.getLine()));
+        clientDto.setPhonelineDto(PhonelineDto.from(client.getPhoneline()));
         return clientDto;
     }
 }

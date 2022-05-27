@@ -2,7 +2,7 @@ package com.utn.UTNPhones.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.utn.UTNPhones.domain.Call;
-import com.utn.UTNPhones.domain.Line;
+import com.utn.UTNPhones.domain.Phoneline;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LineDto {
+public class PhonelineDto {
     private Integer id;
     private String number;
     private Boolean status;
@@ -24,22 +24,22 @@ public class LineDto {
     private List<CallDto> origins;
     private List<CallDto> destinations;
 
-    public static LineDto from (Line line) {
-        List<Call> origins = line.getOrigins();
+    public static PhonelineDto from (Phoneline phoneline) {
+        List<Call> origins = phoneline.getOrigins();
         List<CallDto> originsDto = null;
         if (origins != null)
             originsDto = origins.stream().map(x -> CallDto.from(x)).collect(Collectors.toList());
 
-        List<Call> destinations = line.getDestinations();
+        List<Call> destinations = phoneline.getDestinations();
         List<CallDto> destinationsDto = null;
         if (destinations != null)
             destinationsDto = destinations.stream().map(x -> CallDto.from(x)).collect(Collectors.toList());
 
-        return LineDto.builder()
-                .id(line.getId())
-                .number(line.getNumber())
-                .status(line.getStatus())
-                .city(CityDto.from(line.getCity()))
+        return PhonelineDto.builder()
+                .id(phoneline.getId())
+                .number(phoneline.getNumber())
+                .status(phoneline.getStatus())
+                .city(CityDto.from(phoneline.getCity()))
                 .origins(originsDto)
                 .destinations(destinationsDto)
                 .build();

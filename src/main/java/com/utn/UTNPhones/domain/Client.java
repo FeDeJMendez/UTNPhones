@@ -18,6 +18,6 @@ import javax.persistence.Table;
 @Table(name = "clients")
 public class Client extends Person {
     @OneToOne
-    @JoinColumn(name = "id_line ", unique = true)
-    private Line line;
+    @JoinColumn(name = "phoneline_id ", unique = true)
+    private Phoneline phoneline;
 }

@@ -5,11 +5,9 @@ import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.domain.Person;
 import com.utn.UTNPhones.exceptions.BackofficeExistsException;
 import com.utn.UTNPhones.exceptions.ClientExistsException;
-import com.utn.UTNPhones.exceptions.LineBadDataException;
-import com.utn.UTNPhones.exceptions.LineNoExistsException;
+import com.utn.UTNPhones.exceptions.PhonelineBadDataException;
+import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +23,7 @@ public class PersonService {
     }
 
     public Person addPerson(Person newPerson)
-            throws ClientExistsException, LineBadDataException, LineNoExistsException, BackofficeExistsException {
+            throws ClientExistsException, PhonelineBadDataException, PhonelineNoExistsException, BackofficeExistsException {
         if (newPerson.getClass().equals(Client.class))
             return clientService.addClient((Client) newPerson);
         else

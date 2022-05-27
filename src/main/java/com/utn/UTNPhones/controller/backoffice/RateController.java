@@ -40,7 +40,7 @@ public class RateController {
             throw new CityIsRequiredException();
         if (rateDto.getPrice() == null)
             throw new RatePriceIsRequiredException();
-        if ((rateDto.getStart() == null) || (rateDto.getEnd() == null))
+        if ((rateDto.getStarttime() == null) || (rateDto.getEndtime() == null))
             throw new RateTimeRangeIsRequiredException();
         Rate newRate = rateService.addRate(modelMapper.map(rateDto, Rate.class)); // DOES NOT MAP CITIES WELL
         /*Rate newRate = rateService.addRate(Rate.builder()

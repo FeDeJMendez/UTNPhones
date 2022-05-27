@@ -13,22 +13,22 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BillDto {
     private Integer id;
-    private Integer idClient;
-    private Integer totalCalls;
-    private Double costPrice;
-    private Double totalPrice;
-    private LocalDate date;
+    private Integer dni;
+    private Integer totalcalls;
+    private Double costprice;
+    private Double totalprice;
+    private LocalDate datecreation;
     private LocalDate expiration;
     private Boolean paid;
 
     public static BillDto from (Bill bill) {
         return BillDto.builder()
                 .id(bill.getId())
-                .idClient(bill.getIdClient())
-                .totalCalls(bill.getTotalCalls())
-                .costPrice(bill.getCostPrice())
-                .totalPrice(bill.getTotalPrice())
-                .date(bill.getDate())
+                .dni(bill.getDni())
+                .totalcalls(bill.getTotalcalls())
+                .costprice(bill.getCostprice())
+                .totalprice(bill.getTotalprice())
+                .datecreation(bill.getDatecreation())
                 .expiration(bill.getExpiration())
                 .paid(bill.getPaid())
                 .build();

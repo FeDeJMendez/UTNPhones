@@ -24,7 +24,7 @@ public class Call implements URIInterface {
 
     @Column
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime start;
+    private LocalDateTime starttime;
 
     @Column
     private Integer duration;
@@ -37,11 +37,11 @@ public class Call implements URIInterface {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "origin_line_id", nullable = false)
-    private Line origin;
+    @JoinColumn(name = "origin_phoneline_id", nullable = false)
+    private Phoneline origin;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "destination_line_id", nullable = false)
-    private Line destination;
+    @JoinColumn(name = "destination_phoneline_id", nullable = false)
+    private Phoneline destination;
 }

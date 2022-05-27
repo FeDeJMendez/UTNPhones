@@ -31,13 +31,13 @@ public class RateService {
             throw new RatePriceNegativeException();
 
         List<Rate> rates = rateRepository.findByOriginAndDestination(newRate.getOrigin().getId(), newRate.getDestination().getId());
-        LocalTime newStart = newRate.getStart();
-        LocalTime newEnd = newRate.getEnd();
+        LocalTime newStarttime = newRate.getStarttime();
+        LocalTime newEndtime = newRate.getEndtime();
         for (Rate rate : rates) {
-            LocalTime start = rate.getStart();
-            LocalTime end = rate.getEnd();
-            if ((newStart.compareTo(start) < 0 && newEnd.compareTo(start) > 0) ||
-                    (newStart.compareTo(end) < 0  && newEnd.compareTo(end) > 0)) {
+            LocalTime starttime = rate.getStarttime();
+            LocalTime endtime = rate.getEndtime();
+            if ((newStarttime.compareTo(starttime) < 0 && newEndtime.compareTo(starttime) > 0) ||
+                    (newStarttime.compareTo(endtime) < 0  && newEndtime.compareTo(endtime) > 0)) {
                 throw new RateTimeRangeInUseException();
             }
         }

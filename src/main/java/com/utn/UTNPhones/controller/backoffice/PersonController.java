@@ -7,12 +7,11 @@ import com.utn.UTNPhones.dto.BackofficeDto;
 import com.utn.UTNPhones.dto.ClientDto;
 import com.utn.UTNPhones.exceptions.BackofficeExistsException;
 import com.utn.UTNPhones.exceptions.ClientExistsException;
-import com.utn.UTNPhones.exceptions.LineBadDataException;
-import com.utn.UTNPhones.exceptions.LineNoExistsException;
+import com.utn.UTNPhones.exceptions.PhonelineBadDataException;
+import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
 import com.utn.UTNPhones.service.backoffice.BackofficeService;
 import com.utn.UTNPhones.service.backoffice.ClientService;
 import com.utn.UTNPhones.service.backoffice.PersonService;
-import org.hibernate.annotations.Type;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -67,7 +66,7 @@ public class PersonController {
     ///// Save new client with your new user /////
     @PostMapping(path = "/clients/", consumes = "application/json")
     public ResponseEntity addClient(@RequestBody @Validated final ClientDto clientDto)
-            throws ClientExistsException, LineNoExistsException, LineBadDataException {
+            throws ClientExistsException, PhonelineNoExistsException, PhonelineBadDataException {
         /*LineDto lineDto = clientDto.getLine();
         if (lineDto == null)
             throw new LineRequiredException();

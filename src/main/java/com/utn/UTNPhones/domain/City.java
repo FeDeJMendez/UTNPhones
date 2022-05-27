@@ -33,7 +33,7 @@ public class City implements URIInterface {
     private Province province;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    private List<Line> lines;
+    private List<Phoneline> phonelines;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
     private List<Rate> origins;

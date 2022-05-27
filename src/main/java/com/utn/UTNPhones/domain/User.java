@@ -25,19 +25,19 @@ public class User {
 
     @JsonIgnore
     @Column
-    String password;
+    String passworduser;
 
     @Column(name = "rol")
     @Enumerated(EnumType.STRING)
     Rol rol;
 
     @Column
-    Integer person_id;
+    Integer id_person;
 
-    public User(String lastname, String pass, Rol roleClient, Integer person_id) {
+    public User(String lastname, String pass, Rol roleClient, Integer id_person) {
         this.username = lastname;
-        this.password = pass;
+        this.passworduser = pass;
         this.rol = roleClient;
-        this.person_id = person_id;
+        this.id_person = id_person;
     }
 }

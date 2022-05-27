@@ -25,10 +25,10 @@ public class Rate implements URIInterface {
     private Double price;
 
     @Column
-    private LocalTime start;
+    private LocalTime starttime;
 
     @Column
-    private LocalTime end;
+    private LocalTime endtime;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

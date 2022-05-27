@@ -1,12 +1,11 @@
 package com.utn.UTNPhones.controller.receiver;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Call;
-import com.utn.UTNPhones.domain.Line;
+import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.*;
 import com.utn.UTNPhones.service.backoffice.CallService;
-import com.utn.UTNPhones.service.backoffice.LineService;
+import com.utn.UTNPhones.service.backoffice.PhonelineService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,9 +21,9 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/api/calls")
 public class ReceiverController {
     private final CallService callService;
-    private final LineService lineService;
+    private final PhonelineService lineService;
 
-    public ReceiverController(CallService callService, LineService lineService) {
+    public ReceiverController(CallService callService, PhonelineService lineService) {
         this.callService = callService;
         this.lineService = lineService;
     }
@@ -41,14 +40,14 @@ public class ReceiverController {
     ///// Receiver New Calls /////
     @PostMapping(consumes = "application/json")
     public ResponseEntity receiveCall (@RequestBody @Validated final CallReceiverDto callReceiverDto)
-            throws LineNoExistsException, LineEqualException, LineRequiredException, CallStartIsRequiredException,
-            CallDurationIsRequiredException, LineOriginLowException, LineDestinationLowException {
-        Line origin = lineService.getByNumber(callReceiverDto.getOrigin());
-        Line destination = lineService.getByNumber(callReceiverDto.getDestination());
+            throws PhonelineNoExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
+        Phoneline origin = lineService.getByNumber(callReceiverDto.getOrigin());
+        Phoneline destination = lineService.getByNumber(callReceiverDto.getDestination());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        LocalDateTime start = LocalDateTime.parse(callReceiverDto.getDatetime(), formatter);
+        LocalDateTime starttime = LocalDateTime.parse(callReceiverDto.getDatetime(), formatter);
         Call newCall = callService.addCall(Call.builder()
-                .start(start)
+                .starttime(starttime)
                 .duration(callReceiverDto.getDuration())
                 .origin(origin)
                 .destination(destination)
@@ -56,5 +55,3 @@ public class ReceiverController {
         return ResponseEntity.created(Conf.getLocation(newCall)).build();
     }
 }
-
-//@JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")

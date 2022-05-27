@@ -1,7 +1,7 @@
 package com.utn.UTNPhones.controller.advice;
 
 import com.utn.UTNPhones.exceptions.CallDurationIsRequiredException;
-import com.utn.UTNPhones.exceptions.CallStartIsRequiredException;
+import com.utn.UTNPhones.exceptions.CallStarttimeIsRequiredException;
 import com.utn.UTNPhones.exceptions.ErrorBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CallControllerAdvice {
 
-    @ExceptionHandler(value = {CallStartIsRequiredException.class})
-    protected ResponseEntity<ErrorBody> callStartIsRequired () {
+    @ExceptionHandler(value = {CallStarttimeIsRequiredException.class})
+    protected ResponseEntity<ErrorBody> callStarttimeIsRequired () {
         return new ResponseEntity(ErrorBody.builder()
                 .code(HttpStatus.NOT_FOUND.value())
                 .message("THE START TIME IS REQUIRED")
