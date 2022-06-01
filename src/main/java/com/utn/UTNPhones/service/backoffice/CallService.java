@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class CallService {
     private final CallRepository callRepository;
+    private final PhonelineService phonelineService;
 
     @Autowired
-    public CallService(CallRepository callRepository) {
+    public CallService(CallRepository callRepository, PhonelineService phonelineService) {
         this.callRepository = callRepository;
+        this.phonelineService = phonelineService;
     }
 
 
     public Call addCall(Call newCall)
             throws PhonelineRequiredException, PhonelineEqualException, CallStarttimeIsRequiredException,
-            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException, PhonelineNoExistsException {
         if ((newCall.getOrigin() == null) || (newCall.getDestination() == null))
             throw new PhonelineRequiredException();
+        newCall.setOrigin(phonelineService.getById(newCall.getOrigin().getId()));
+        newCall.setDestination(phonelineService.getById(newCall.getDestination().getId()));
         if (newCall.getOrigin().getNumber() == newCall.getDestination().getNumber())
             throw new PhonelineEqualException();
         if (newCall.getStarttime() == null)

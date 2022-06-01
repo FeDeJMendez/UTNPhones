@@ -21,11 +21,11 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("/api/calls")
 public class ReceiverController {
     private final CallService callService;
-    private final PhonelineService lineService;
+    private final PhonelineService phonelineService;
 
-    public ReceiverController(CallService callService, PhonelineService lineService) {
+    public ReceiverController(CallService callService, PhonelineService phonelineService) {
         this.callService = callService;
-        this.lineService = lineService;
+        this.phonelineService = phonelineService;
     }
 
     @Data
@@ -42,8 +42,8 @@ public class ReceiverController {
     public ResponseEntity receiveCall (@RequestBody @Validated final CallReceiverDto callReceiverDto)
             throws PhonelineNoExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
             CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
-        Phoneline origin = lineService.getByNumber(callReceiverDto.getOrigin());
-        Phoneline destination = lineService.getByNumber(callReceiverDto.getDestination());
+        Phoneline origin = phonelineService.getByNumber(callReceiverDto.getOrigin());
+        Phoneline destination = phonelineService.getByNumber(callReceiverDto.getDestination());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime starttime = LocalDateTime.parse(callReceiverDto.getDatetime(), formatter);
         Call newCall = callService.addCall(Call.builder()

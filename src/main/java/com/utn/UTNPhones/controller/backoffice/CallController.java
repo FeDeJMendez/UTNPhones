@@ -31,7 +31,7 @@ public class CallController {
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addCall (@RequestBody @Validated final CallDto callDto)
             throws CallStarttimeIsRequiredException, CallDurationIsRequiredException, PhonelineRequiredException,
-            PhonelineEqualException, PhonelineDestinationLowException, PhonelineOriginLowException {
+            PhonelineEqualException, PhonelineDestinationLowException, PhonelineOriginLowException, PhonelineNoExistsException {
         Call newCall = callService.addCall(modelMapper.map(callDto, Call.class));
         return ResponseEntity.created(Conf.getLocation(newCall)).build();
     }
