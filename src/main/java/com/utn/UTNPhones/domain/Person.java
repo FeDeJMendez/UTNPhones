@@ -26,13 +26,13 @@ public class Person implements URIInterface {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(length = 50)
     private String name;
 
-    @Column
+    @Column(length = 50)
     private String lastname;
 
-//    @Column(unique=true)
+    @Column(unique=true)
     private Integer dni;
 
 

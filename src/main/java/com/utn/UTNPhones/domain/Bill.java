@@ -24,6 +24,9 @@ public class Bill implements URIInterface {
     @Column
     private Integer dni;
 
+    @Column(length = 10)
+    private String number;
+
     @Column
     private Integer totalcalls;
 

@@ -20,14 +20,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column
+    @Column(length = 50)
     String username;
 
     @JsonIgnore
-    @Column
+    @Column(length = 50)
     String passworduser;
 
-    @Column(name = "rol")
+    @Column(name = "rol", length = 31)
     @Enumerated(EnumType.STRING)
     Rol rol;
 

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class BillDto {
     private Integer id;
     private Integer dni;
+    private String number;
     private Integer totalcalls;
     private Double costprice;
     private Double totalprice;
@@ -25,6 +26,7 @@ public class BillDto {
         return BillDto.builder()
                 .id(bill.getId())
                 .dni(bill.getDni())
+                .number(bill.getNumber())
                 .totalcalls(bill.getTotalcalls())
                 .costprice(bill.getCostprice())
                 .totalprice(bill.getTotalprice())

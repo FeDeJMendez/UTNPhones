@@ -21,10 +21,10 @@ public class City implements URIInterface {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(length = 50)
     private String name;
 
-    @Column
+    @Column(unique = true)
     private Integer prefix;
 
     @JsonIgnore

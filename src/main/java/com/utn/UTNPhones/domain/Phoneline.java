@@ -21,7 +21,7 @@ public class Phoneline implements URIInterface {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(length = 10)
     private String number;
 
     @Column
