@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class CallService {
     private final CallRepository callRepository;
@@ -44,5 +47,9 @@ public class CallService {
 
     public Page getAll(Pageable pageable) {
         return callRepository.findAll(pageable);
+    }
+
+    public List<Call> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate) {
+        return callRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
 }

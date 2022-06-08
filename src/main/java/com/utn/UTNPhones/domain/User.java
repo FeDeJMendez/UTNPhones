@@ -32,12 +32,12 @@ public class User {
     Rol rol;
 
     @Column
-    Integer id_person;
+    Integer person_id;
 
-    public User(String lastname, String pass, Rol roleClient, Integer id_person) {
+    public User(String lastname, String pass, Rol roleClient, Integer person_id) {
         this.username = lastname;
         this.passworduser = pass;
         this.rol = roleClient;
-        this.id_person = id_person;
+        this.person_id = person_id;
     }
 }

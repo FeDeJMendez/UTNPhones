@@ -1,5 +1,7 @@
 package com.utn.UTNPhones.config;
 
+import com.utn.UTNPhones.domain.Call;
+import com.utn.UTNPhones.dto.CallDto;
 import com.utn.UTNPhones.utils.URIInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 public class Conf {
@@ -36,4 +40,10 @@ public class Conf {
                 body(page.getContent());
     }
 
+    ///// Convert a List of Calls to CallsDTO /////
+    public static List<CallDto> listCallsToDto (List<Call> list){
+        return list.stream().
+                map(x -> CallDto.from(x)).
+                collect(Collectors.toList());
+    }
 }

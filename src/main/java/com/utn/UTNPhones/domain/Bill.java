@@ -1,6 +1,5 @@
 package com.utn.UTNPhones.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.utn.UTNPhones.utils.URIInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

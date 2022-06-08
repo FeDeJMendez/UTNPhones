@@ -1,3 +1,4 @@
+
 TRUNCATE TABLE provinces;
 INSERT INTO provinces(name) 
 	VALUES ('Buenos Aires'), ('Catamarca'), ('Chaco'), ('Chubut'), 
@@ -29,6 +30,6 @@ INSERT INTO phonelines (number)
     
     
 TRUNCATE TABLE persons;
-INSERT INTO persons (name, lastname, dni, phoneline_id)
-	VALUES ('Juan', 'Perez', 11123456, 1), ('Pepe', 'Juarez', 22123456, 2), ('Martin', 'Ramirez', 33123456, 3), ('Ramiro', 'Martinez', 44123456, 4 );
+INSERT INTO persons (DTYPE, name, lastname, dni, phoneline_id)
+	VALUES ('CLIENT', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), ('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
 

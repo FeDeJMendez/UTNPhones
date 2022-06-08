@@ -20,7 +20,7 @@ public class Province implements URIInterface {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 10)
+    @Column(length = 50)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "province")
