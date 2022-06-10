@@ -78,4 +78,25 @@ public class PhonelineControllerAdvice {
                 ,HttpStatus.CONFLICT
         );
     }
+
+    @ExceptionHandler(value = {PhonelineAssociatedCallsException.class})
+    protected ResponseEntity<ErrorBody> phonelineHasAssociateCalls() {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .message("THE LINE HAS ASSOCIATED CALL/S")
+                .build()
+                ,HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler(value = {PhonelineLengthException.class})
+    protected ResponseEntity<ErrorBody> phonelineBadLength () {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .message("THE NUMBER MUST BE 10 CHARACTERS")
+                .build(),
+                HttpStatus.NOT_FOUND
+        );
+    }
+
 }

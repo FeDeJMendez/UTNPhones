@@ -31,5 +31,6 @@ INSERT INTO phonelines (number)
     
 TRUNCATE TABLE persons;
 INSERT INTO persons (DTYPE, name, lastname, dni, phoneline_id)
-	VALUES ('CLIENT', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), ('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
+	VALUES ('CLIENT', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), 
+    ('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
 

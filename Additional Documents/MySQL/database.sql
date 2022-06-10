@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS phonelines(
     city_id int,
     --
     constraint pk_idPhoneline primary key (id),
+    constraint u_number unique(number),
     foreign key fk_city (city_id) references cities (id)
 );
 

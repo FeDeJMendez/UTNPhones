@@ -1,5 +1,5 @@
 
- ##### ADD NEW PHONELINE -> Set Status = true and find city_id #####
+##### ADD NEW PHONELINE -> Set Status = true and find city_id #####
  
 DROP TRIGGER IF EXISTS TBI_AddStatusAndCityInNewPhoneline;
 DELIMITER $$
@@ -13,7 +13,31 @@ $$
 
 
 
- ##### ADD NEW RATE -> Check if end in the end of the day #####
+##### DELETE PHONELINE -> Verification and delete line for Client #####
+
+DROP TRIGGER IF EXISTS TBD_VerificationAndEditClientPhoneLineForDeletePhoneline;
+DELIMITER $$
+	CREATE TRIGGER TBD_VerificationAndEditClientPhoneLineForDeletePhoneline
+		BEFORE DELETE ON phonelines FOR EACH ROW
+	BEGIN
+		IF EXISTS (SELECT * FROM calls c
+					WHERE c.origin_phoneline_id = OLD.id
+						OR c.destination_phoneline_id = OLD.id
+			)THEN
+			SIGNAL SQLSTATE '45000'
+				SET MESSAGE_TEXT = 'THE LINE HAS ASSOCIATED CALL/S.',
+				mysql_errno = '1';
+		ELSE
+			UPDATE persons 
+				SET phoneline_id = null 
+				WHERE phoneline_id = OLD.id;
+		END IF;
+    END;
+$$
+
+
+
+##### ADD NEW RATE -> Check if end in the end of the day #####
  
 DROP TRIGGER IF EXISTS TBI_CheckEndNewRate;
 DELIMITER $$
@@ -63,14 +87,17 @@ $$
 
 
 
- ##### ADD NEW BILL -> Set costPrice (without IVA), datecreation, expiration (15 days), paid (false) #####
+##### ADD NEW BILL -> Set costPrice (without IVA), datecreation, expiration (15 days), paid (false) #####
  
 DROP TRIGGER IF EXISTS TBI_AddDataInNewBill;
 DELIMITER $$
 	CREATE TRIGGER TBI_AddDataInNewBill
 		BEFORE INSERT ON bills FOR EACH ROW
 	BEGIN
-		SET NEW.costprice = NEW.totalprice / 1.21;
+		DECLARE vCostPrice double(8,2);
+        SELECT NEW.totalprice / 1.21 
+			INTO vCostPrice;
+		SET NEW.costprice = vCostPrice;
         SET NEW.datecreation = CURDATE();
         SET NEW.expiration = TIMESTAMPADD(DAY,15,new.datecreation);
         SET NEW.paid = false;        

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -41,7 +42,7 @@ public class ReceiverController {
     @PostMapping(consumes = "application/json")
     public ResponseEntity receiveCall (@RequestBody @Validated final CallReceiverDto callReceiverDto)
             throws PhonelineNoExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
-            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException, SQLException {
         Phoneline origin = phonelineService.getByNumber(callReceiverDto.getOrigin());
         Phoneline destination = phonelineService.getByNumber(callReceiverDto.getDestination());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");

@@ -1,19 +1,27 @@
 package com.utn.UTNPhones.service.backoffice;
 
 import com.utn.UTNPhones.domain.Bill;
+import com.utn.UTNPhones.domain.Client;
+import com.utn.UTNPhones.exceptions.ClientNoExistsException;
 import com.utn.UTNPhones.repository.BillRepository;
+import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 public class BillService {
     private final BillRepository billRepository;
+    private final ClientService clientService;
 
     @Autowired
-    public BillService(BillRepository billRepository) {
+    public BillService(BillRepository billRepository, ClientService clientService) {
         this.billRepository = billRepository;
+        this.clientService = clientService;
     }
 
 
@@ -26,5 +34,24 @@ public class BillService {
 
     public Page getAll(Pageable pageable) {
         return billRepository.findAll(pageable);
+    }
+
+    public List<Bill> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate)
+            throws ClientNoExistsException {
+        if (!clientService.existsById(idClient))
+            throw new ClientNoExistsException();
+        return billRepository.findByClientBetweenDates(idClient,startDate,endDate);
+    }
+
+    public List<Bill> getByClient(Integer idClient)
+            throws ClientNoExistsException {
+        Client client = clientService.getById(idClient);
+        return billRepository.findByDni(client.getDni());
+    }
+
+    public List<Bill> getUnpaidByClient(Integer idClient)
+            throws ClientNoExistsException {
+        Client client = clientService.getById(idClient);
+        return billRepository.findUnpaidByDni(client.getDni());
     }
 }

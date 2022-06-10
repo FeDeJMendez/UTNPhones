@@ -3,6 +3,7 @@ package com.utn.UTNPhones.service.backoffice;
 import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.ClientExistsException;
+import com.utn.UTNPhones.exceptions.ClientNoExistsException;
 import com.utn.UTNPhones.exceptions.PhonelineBadDataException;
 import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
 import com.utn.UTNPhones.repository.ClientRepository;
@@ -41,5 +42,15 @@ public class ClientService {
 
     public Page<Client> getAll(Pageable pageable) {
         return clientRepository.findAll(pageable);
+    }
+
+    public Client getById (Integer id)
+            throws ClientNoExistsException {
+        return clientRepository.findById(id)
+                .orElseThrow(ClientNoExistsException::new);
+    }
+
+    public Boolean existsById (Integer id) {
+        return clientRepository.existsById(id);
     }
 }

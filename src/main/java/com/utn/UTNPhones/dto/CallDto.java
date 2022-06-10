@@ -22,8 +22,8 @@ public class CallDto {
     private Integer duration;
     private Double total;
     private Integer idBill;
-//    private PhonelineDto origin;
-//    private PhonelineDto destination;
+    private PhonelineDto origin;
+    private PhonelineDto destination;
 
     public static CallDto from ( Call call) {
         return CallDto.builder()
@@ -32,8 +32,8 @@ public class CallDto {
                 .duration(call.getDuration())
                 .total(call.getTotal())
                 .idBill(call.getIdBill())
-//                .origin(PhonelineDto.from(call.getOrigin()))
-//                .destination(PhonelineDto.from(call.getDestination()))
+                .origin(PhonelineDto.from(call.getOrigin()))
+                .destination(PhonelineDto.from(call.getDestination()))
                 .build();
     }
 }

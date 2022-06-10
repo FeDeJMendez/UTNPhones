@@ -1,6 +1,8 @@
 package com.utn.UTNPhones.config;
 
+import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.domain.Call;
+import com.utn.UTNPhones.dto.BillDto;
 import com.utn.UTNPhones.dto.CallDto;
 import com.utn.UTNPhones.utils.URIInterface;
 import org.modelmapper.ModelMapper;
@@ -44,6 +46,13 @@ public class Conf {
     public static List<CallDto> listCallsToDto (List<Call> list){
         return list.stream().
                 map(x -> CallDto.from(x)).
+                collect(Collectors.toList());
+    }
+
+    ///// Convert a List of Bills to BillsDTO /////
+    public static List<BillDto> listBillsToDto (List<Bill> list){
+        return list.stream().
+                map(x -> BillDto.from(x)).
                 collect(Collectors.toList());
     }
 }

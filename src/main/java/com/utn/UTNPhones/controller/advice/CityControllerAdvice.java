@@ -1,13 +1,15 @@
 package com.utn.UTNPhones.controller.advice;
 
-import com.utn.UTNPhones.exceptions.CityExistsException;
-import com.utn.UTNPhones.exceptions.CityIsRequiredException;
-import com.utn.UTNPhones.exceptions.CityNoExistsException;
-import com.utn.UTNPhones.exceptions.ErrorBody;
+import com.utn.UTNPhones.exceptions.*;
+import org.hibernate.JDBCException;
+import org.hibernate.exception.GenericJDBCException;
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.sql.SQLException;
 
 @ControllerAdvice
 public class CityControllerAdvice {

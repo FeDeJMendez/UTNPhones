@@ -21,7 +21,7 @@ public class Phoneline implements URIInterface {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 10)
+    @Column(length = 10, unique=true)
     private String number;
 
     @Column
@@ -29,12 +29,14 @@ public class Phoneline implements URIInterface {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id", nullable = false)
+    @JoinColumn(name = "city_id")
     private City city;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
     private List<Call> origins;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
     private List<Call> destinations;
 }

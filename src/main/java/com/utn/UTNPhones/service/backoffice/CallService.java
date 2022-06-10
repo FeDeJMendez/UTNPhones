@@ -15,17 +15,20 @@ import java.util.List;
 public class CallService {
     private final CallRepository callRepository;
     private final PhonelineService phonelineService;
+    private final ClientService clientService;
 
     @Autowired
-    public CallService(CallRepository callRepository, PhonelineService phonelineService) {
+    public CallService(CallRepository callRepository, PhonelineService phonelineService, ClientService clientService) {
         this.callRepository = callRepository;
         this.phonelineService = phonelineService;
+        this.clientService = clientService;
     }
 
 
     public Call addCall(Call newCall)
             throws PhonelineRequiredException, PhonelineEqualException, CallStarttimeIsRequiredException,
-            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException, PhonelineNoExistsException {
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException,
+            PhonelineNoExistsException {
         if ((newCall.getOrigin() == null) || (newCall.getDestination() == null))
             throw new PhonelineRequiredException();
         newCall.setOrigin(phonelineService.getById(newCall.getOrigin().getId()));
@@ -43,13 +46,21 @@ public class CallService {
         Double total = 0.0;
         newCall.setTotal(total);
         return callRepository.save(newCall);
+        /*try {
+            return callRepository.save(newCall);
+        } catch (GenericJDBCException ex) {
+            throw new SQLException(ex.getSQLException());
+        }*/
     }
 
     public Page getAll(Pageable pageable) {
         return callRepository.findAll(pageable);
     }
 
-    public List<Call> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate) {
+    public List<Call> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate)
+            throws ClientNoExistsException {
+        if (!clientService.existsById(idClient))
+            throw new ClientNoExistsException();
         return callRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
 }
