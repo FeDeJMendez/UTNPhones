@@ -1,5 +1,7 @@
 package com.utn.UTNPhones.service.backoffice;
 
+import com.utn.UTNPhones.domain.Bill;
+import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.ClientExistsException;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -50,7 +54,19 @@ public class ClientService {
                 .orElseThrow(ClientNoExistsException::new);
     }
 
+    public Client getByDni (Integer dni)
+            throws ClientNoExistsException {
+        return clientRepository.findByDni(dni)
+                .orElseThrow(ClientNoExistsException::new);
+    }
+
     public Boolean existsById (Integer id) {
         return clientRepository.existsById(id);
+    }
+
+    public void deleteByDni(Integer dni)
+            throws ClientNoExistsException {
+        Client client = this.getByDni(dni);
+        clientRepository.deleteById(client.getId());
     }
 }

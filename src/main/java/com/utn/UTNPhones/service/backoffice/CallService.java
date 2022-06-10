@@ -63,4 +63,9 @@ public class CallService {
             throw new ClientNoExistsException();
         return callRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
+
+    public List<Call> getUnbilledByPhonelineNumber(Integer id) {
+        return callRepository.findUnbilledByPhonelineNumber(id);
+    }
+
 }

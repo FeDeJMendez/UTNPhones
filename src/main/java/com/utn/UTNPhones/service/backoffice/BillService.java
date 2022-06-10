@@ -4,7 +4,6 @@ import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.exceptions.ClientNoExistsException;
 import com.utn.UTNPhones.repository.BillRepository;
-import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,4 +53,5 @@ public class BillService {
         Client client = clientService.getById(idClient);
         return billRepository.findUnpaidByDni(client.getDni());
     }
+
 }

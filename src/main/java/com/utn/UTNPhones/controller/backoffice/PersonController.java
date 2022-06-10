@@ -5,10 +5,7 @@ import com.utn.UTNPhones.domain.Backoffice;
 import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.dto.BackofficeDto;
 import com.utn.UTNPhones.dto.ClientDto;
-import com.utn.UTNPhones.exceptions.BackofficeExistsException;
-import com.utn.UTNPhones.exceptions.ClientExistsException;
-import com.utn.UTNPhones.exceptions.PhonelineBadDataException;
-import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
+import com.utn.UTNPhones.exceptions.*;
 import com.utn.UTNPhones.service.backoffice.BackofficeService;
 import com.utn.UTNPhones.service.backoffice.ClientService;
 import com.utn.UTNPhones.service.backoffice.PersonService;
@@ -16,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -82,6 +80,14 @@ public class PersonController {
     public ResponseEntity<List<ClientDto>> allClients(Pageable pageable) {
         Page<Client> page = clientService.getAll(pageable);
         return Conf.response(page);
+    }
+
+    ///// Delete Client By Dni /////
+    @DeleteMapping(value = "{dni}", produces = "application/json")
+    public ResponseEntity deleteClientByDni(@PathVariable(value = "dni") Integer dni)
+            throws ClientNoExistsException {
+        clientService.deleteByDni(dni);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 

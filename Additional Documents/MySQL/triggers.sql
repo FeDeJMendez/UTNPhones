@@ -13,11 +13,11 @@ $$
 
 
 
-##### DELETE PHONELINE -> Verification and delete line for Client #####
+##### DELETE PHONELINE -> Verification and Delete Line for Client #####
 
-DROP TRIGGER IF EXISTS TBD_VerificationAndEditClientPhoneLineForDeletePhoneline;
+DROP TRIGGER IF EXISTS TBD_VerificationAndEditClientPhonelineForDeletePhoneline;
 DELIMITER $$
-	CREATE TRIGGER TBD_VerificationAndEditClientPhoneLineForDeletePhoneline
+	CREATE TRIGGER TBD_VerificationAndEditClientPhonelineForDeletePhoneline
 		BEFORE DELETE ON phonelines FOR EACH ROW
 	BEGIN
 		IF EXISTS (SELECT * FROM calls c
@@ -101,6 +101,19 @@ DELIMITER $$
         SET NEW.datecreation = CURDATE();
         SET NEW.expiration = TIMESTAMPADD(DAY,15,new.datecreation);
         SET NEW.paid = false;        
+    END;
+$$
+
+
+
+##### DELETE CLIENT -> Liquidate calls and create Bill #####
+ 
+DROP TRIGGER IF EXISTS TBD_LiquidateClient;
+DELIMITER $$
+	CREATE TRIGGER TBD_LiquidateClient
+		BEFORE DELETE ON persons FOR EACH ROW
+	BEGIN
+		CALL p_GenerateBillPhoneline(IFNULL(OLD.phoneline_id, 0));
     END;
 $$
 

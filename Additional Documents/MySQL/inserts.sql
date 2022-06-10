@@ -32,5 +32,10 @@ INSERT INTO phonelines (number)
 TRUNCATE TABLE persons;
 INSERT INTO persons (DTYPE, name, lastname, dni, phoneline_id)
 	VALUES ('CLIENT', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), 
-    ('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
+		('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
 
+
+
+TRUNCATE TABLE calls;
+INSERT INTO calls (starttime, duration, origin_phoneline_id, destination_phoneline_id) 
+	VALUES ('2022-03-10 12:00:00', 8, 1, 2), ('2022-03-11 12:10:00', 15, 2, 4), ('2022-03-11 15:05:00', 6, 3, 4);

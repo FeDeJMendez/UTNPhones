@@ -40,3 +40,6 @@ spring:
       org:
         hibernate:
           SQL: debug
+
+  main:
+    allow-circular-references: true

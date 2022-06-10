@@ -2,7 +2,6 @@
 ##### Generate Billing All Phonelines #####
 
 DROP PROCEDURE IF EXISTS p_GenerateBills;
-
 DELIMITER $$
 	CREATE PROCEDURE p_GenerateBills ()
     BEGIN
@@ -15,16 +14,15 @@ DELIMITER $$
         -- -- --
         DECLARE curPhonelineBill CURSOR FOR
 			SELECT pl.id,
-					(SELECT dni 
-						FROM persons 
-                        WHERE phoneline_id = pl.id) 
-					as dni,
+					pe.dni,
 					pl.number,
                     IFNULL(COUNT(*),0) as totalcalls, 
                     IFNULL(SUM(c.total),0) as totalprice                    
 				FROM phonelines pl
                 INNER JOIN calls c
 					ON pl.id = c.origin_phoneline_id
+				INNER JOIN persons pe
+					ON pl.id = pe.phoneline_id
 				WHERE c.idBill = 0
                 GROUP BY pl.id;
 		-- -- -- 
@@ -42,7 +40,8 @@ DELIMITER $$
 				VALUES (vDni, vNumber, vTotalcalls, vTotalprice);
 			UPDATE calls
 				SET idBill = (SELECT MAX(id) FROM bills)
-                WHERE origin_phoneline_id = vId;
+                WHERE origin_phoneline_id = vId
+					AND idBill = 0;
         END LOOP GETDATA;
         -- -- -- 
         CLOSE curPhonelineBill;
