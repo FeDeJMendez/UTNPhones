@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class CallController {
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addCall (@RequestBody @Validated final CallDto callDto)
             throws CallStarttimeIsRequiredException, CallDurationIsRequiredException, PhonelineRequiredException,
-            PhonelineEqualException, PhonelineDestinationLowException, PhonelineOriginLowException, PhonelineNoExistsException {
+            PhonelineEqualException, PhonelineDestinationLowException, PhonelineOriginLowException, PhonelineNotExistsException {
         Call newCall = callService.addCall(modelMapper.map(callDto, Call.class));
         return ResponseEntity.created(Conf.getLocation(newCall)).build();
     }
@@ -52,7 +51,7 @@ public class CallController {
     public ResponseEntity<List<CallDto>> getCallsByUserBetweenDates (@PathVariable Integer idClient,
                                                                      @PathVariable(value = "start") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
                                                                      @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         List<Call> filteredCalls = callService.getByClientBetweenDates(idClient, startDate, endDate);
         List<CallDto> filteredCallsDto = Conf.listCallsToDto(filteredCalls);
         return ResponseEntity

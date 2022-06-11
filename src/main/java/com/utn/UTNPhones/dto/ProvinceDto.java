@@ -19,17 +19,17 @@ import java.util.stream.Collectors;
 public class ProvinceDto {
     private Integer id;
     private String name;
-    private List<CityDto> cities;
+//    private List<CityDto> cities;
 
     public static ProvinceDto from (Province province) {
-        List<City> cities = province.getCities();
+        /*List<City> cities = province.getCities();
         List<CityDto> citiesDto = null;
         if (cities != null)
-            citiesDto = cities.stream().map(x -> CityDto.from(x)).collect(Collectors.toList());
+            citiesDto = cities.stream().map(x -> CityDto.from(x)).collect(Collectors.toList());*/
         return ProvinceDto.builder().
                 id(province.getId()).
                 name(province.getName()).
-                cities(citiesDto).
+//                cities(citiesDto).
                 build();
     }
 }

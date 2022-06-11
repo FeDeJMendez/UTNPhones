@@ -1,7 +1,9 @@
 package com.utn.UTNPhones.service.backoffice;
 
+import com.utn.UTNPhones.domain.City;
 import com.utn.UTNPhones.domain.Rate;
-import com.utn.UTNPhones.exceptions.CityNoExistsException;
+import com.utn.UTNPhones.exceptions.CityNotExistsException;
+import com.utn.UTNPhones.exceptions.RateNotExistsException;
 import com.utn.UTNPhones.exceptions.RatePriceNegativeException;
 import com.utn.UTNPhones.exceptions.RateTimeRangeInUseException;
 import com.utn.UTNPhones.repository.RateRepository;
@@ -26,7 +28,7 @@ public class RateService {
 
 
     public Rate addRate(Rate newRate)
-            throws RateTimeRangeInUseException, RatePriceNegativeException, CityNoExistsException {
+            throws RateTimeRangeInUseException, RatePriceNegativeException, CityNotExistsException {
         if (newRate.getPrice() < 0)
             throw new RatePriceNegativeException();
 
@@ -46,13 +48,21 @@ public class RateService {
                 (!cityService.existsById(newRate.getDestination().getId()))) {
             throw new CityNoExistsException();
         }*/
-
-        newRate.setOrigin(cityService.getById(newRate.getOrigin().getId()));
-        newRate.setDestination(cityService.getById(newRate.getDestination().getId()));
+        City origin = cityService.getById(newRate.getOrigin().getId());
+        City destination = cityService.getById(newRate.getDestination().getId());
+        newRate.setOrigin(origin);
+        newRate.setDestination(destination);
         return rateRepository.save(newRate);
     }
 
     public Page<Rate> getAll(Pageable pageable) {
         return rateRepository.findAll(pageable);
+    }
+
+    public void deleteById(Integer id)
+            throws RateNotExistsException {
+        if (!rateRepository.existsById(id))
+            throw new RateNotExistsException();
+        rateRepository.deleteById(id);
     }
 }

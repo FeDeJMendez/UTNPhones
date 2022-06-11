@@ -1,5 +1,6 @@
 package com.utn.UTNPhones.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.utn.UTNPhones.utils.URIInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class Province implements URIInterface {
     @Column(length = 50)
     private String name;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "province")
     private List<City> cities;
 }

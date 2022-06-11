@@ -47,4 +47,14 @@ public class RateControllerAdvice {
                 ,HttpStatus.NOT_FOUND
         );
     }
+
+    @ExceptionHandler(value = {RateNotExistsException.class})
+    protected ResponseEntity<ErrorBody> rateNotExists () {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.NOT_EXTENDED.value())
+                .message("THE RATE DOES NOT EXISTS")
+                .build(),
+                HttpStatus.NOT_FOUND
+        );
+    }
 }

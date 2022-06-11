@@ -3,7 +3,7 @@ package com.utn.UTNPhones.controller.backoffice;
 import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.dto.BillDto;
-import com.utn.UTNPhones.exceptions.ClientNoExistsException;
+import com.utn.UTNPhones.exceptions.ClientNotExistsException;
 import com.utn.UTNPhones.service.backoffice.BillService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class BillController {
     ///// Get Bills by Client /////
     @GetMapping(path = "/clients/{idClient}", produces = "application/json")
     public ResponseEntity<List<BillDto>> byClient (@PathVariable Integer idClient)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         List<Bill> filteredBills = billService.getByClient(idClient);
         List<BillDto> filteredCallsDto = Conf.listBillsToDto(filteredBills);
         return ResponseEntity
@@ -60,7 +60,7 @@ public class BillController {
     public ResponseEntity<List<BillDto>> getBillsByUserBetweenDates (@PathVariable Integer idClient,
                                                                      @PathVariable(value = "start") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
                                                                      @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         List<Bill> filteredBills = billService.getByClientBetweenDates(idClient, startDate, endDate);
         List<BillDto> filteredCallsDto = Conf.listBillsToDto(filteredBills);
         return ResponseEntity
@@ -71,7 +71,7 @@ public class BillController {
     ///// Get Unpaid Bills by Client /////
     @GetMapping(path = "/clients/{idClient}/unpaid", produces = "application/json")
     public ResponseEntity<List<BillDto>> getUnpaidBillsByClient(@PathVariable Integer idClient)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         List<Bill> filteredBills = billService.getUnpaidByClient(idClient);
         List<BillDto> filteredCallsDto = Conf.listBillsToDto(filteredBills);
         return ResponseEntity

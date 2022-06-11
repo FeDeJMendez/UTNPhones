@@ -30,13 +30,11 @@ public class Rate implements URIInterface {
     @Column
     private LocalTime endtime;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "origin_city_id", nullable = false)
     private City origin;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_city_id", nullable = false)
     private City destination;
 }

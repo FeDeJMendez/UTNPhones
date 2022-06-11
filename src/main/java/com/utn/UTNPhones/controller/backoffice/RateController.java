@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class RateController {
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity newRate (@RequestBody @Validated final RateDto rateDto)
             throws CityIsRequiredException, RatePriceIsRequiredException, RateTimeRangeIsRequiredException,
-            RateTimeRangeInUseException, RatePriceNegativeException, CityNoExistsException {
+            RateTimeRangeInUseException, RatePriceNegativeException, CityNotExistsException {
         if ((rateDto.getOrigin() == null) || (rateDto.getDestination() == null))
             throw new CityIsRequiredException();
         if (rateDto.getPrice() == null)
@@ -58,5 +59,13 @@ public class RateController {
     public ResponseEntity<List<Rate>> allRates (Pageable pageable) {
         Page<Rate> page = rateService.getAll(pageable);
         return Conf.response(page);
+    }
+
+    ///// Delete Rate /////
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    public ResponseEntity deleteRateById(@PathVariable(value = "id") Integer id)
+            throws RateNotExistsException {
+        rateService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

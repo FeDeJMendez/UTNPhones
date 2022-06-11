@@ -2,7 +2,7 @@ package com.utn.UTNPhones.service.backoffice;
 
 import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.domain.Client;
-import com.utn.UTNPhones.exceptions.ClientNoExistsException;
+import com.utn.UTNPhones.exceptions.ClientNotExistsException;
 import com.utn.UTNPhones.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -36,20 +36,20 @@ public class BillService {
     }
 
     public List<Bill> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         if (!clientService.existsById(idClient))
-            throw new ClientNoExistsException();
+            throw new ClientNotExistsException();
         return billRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
 
     public List<Bill> getByClient(Integer idClient)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         Client client = clientService.getById(idClient);
         return billRepository.findByDni(client.getDni());
     }
 
     public List<Bill> getUnpaidByClient(Integer idClient)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         Client client = clientService.getById(idClient);
         return billRepository.findUnpaidByDni(client.getDni());
     }

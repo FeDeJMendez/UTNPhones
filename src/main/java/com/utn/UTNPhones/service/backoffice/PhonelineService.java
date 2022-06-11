@@ -4,7 +4,7 @@ import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.PhonelineAssociatedCallsException;
 import com.utn.UTNPhones.exceptions.PhonelineExistsException;
 import com.utn.UTNPhones.exceptions.PhonelineLengthException;
-import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
+import com.utn.UTNPhones.exceptions.PhonelineNotExistsException;
 import com.utn.UTNPhones.repository.PhonelineRepository;
 import org.hibernate.exception.GenericJDBCException;
 import org.modelmapper.ModelMapper;
@@ -26,7 +26,7 @@ public class PhonelineService {
     }
 
 
-    public Phoneline addLine(Phoneline newPhoneline)
+    public Phoneline addPhoneline(Phoneline newPhoneline)
             throws PhonelineExistsException, SQLException, PhonelineLengthException {
         if (newPhoneline.getNumber().length() != 10)
             throw new PhonelineLengthException();
@@ -44,36 +44,36 @@ public class PhonelineService {
     }
 
     public Phoneline getById (Integer id)
-            throws PhonelineNoExistsException {
-        return phonelineRepository.findById(id).orElseThrow(PhonelineNoExistsException::new);
+            throws PhonelineNotExistsException {
+        return phonelineRepository.findById(id).orElseThrow(PhonelineNotExistsException::new);
     }
 
     public Phoneline getByNumber (String number)
-            throws PhonelineNoExistsException {
+            throws PhonelineNotExistsException {
         return phonelineRepository.findByNumber(number)
-                .orElseThrow(PhonelineNoExistsException::new);
+                .orElseThrow(PhonelineNotExistsException::new);
     }
 
     public void lowPhoneline(String number)
-            throws PhonelineNoExistsException {
+            throws PhonelineNotExistsException {
         Phoneline phoneline = phonelineRepository.findByNumber(number)
-                .orElseThrow(PhonelineNoExistsException::new);
+                .orElseThrow(PhonelineNotExistsException::new);
         phoneline.setStatus(false);
         phonelineRepository.save(phoneline);
     }
 
     public void highPhoneline(String number)
-            throws PhonelineNoExistsException {
+            throws PhonelineNotExistsException {
         Phoneline phoneline = phonelineRepository.findByNumber(number)
-                .orElseThrow(PhonelineNoExistsException::new);
+                .orElseThrow(PhonelineNotExistsException::new);
         phoneline.setStatus(true);
         phonelineRepository.save(phoneline);
     }
 
     public void deletePhonelineByNumber(String number)
-            throws PhonelineNoExistsException, PhonelineAssociatedCallsException {
+            throws PhonelineNotExistsException, PhonelineAssociatedCallsException {
         Phoneline phoneline = phonelineRepository.findByNumber(number)
-                .orElseThrow(PhonelineNoExistsException::new);
+                .orElseThrow(PhonelineNotExistsException::new);
         if (phoneline.getOrigins().isEmpty()
                 && (phoneline.getDestinations().isEmpty()))
             phonelineRepository.deleteById(phoneline.getId());

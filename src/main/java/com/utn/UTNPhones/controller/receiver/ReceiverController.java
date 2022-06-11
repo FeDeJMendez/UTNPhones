@@ -41,7 +41,7 @@ public class ReceiverController {
     ///// Receiver New Calls /////
     @PostMapping(consumes = "application/json")
     public ResponseEntity receiveCall (@RequestBody @Validated final CallReceiverDto callReceiverDto)
-            throws PhonelineNoExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
+            throws PhonelineNotExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
             CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException, SQLException {
         Phoneline origin = phonelineService.getByNumber(callReceiverDto.getOrigin());
         Phoneline destination = phonelineService.getByNumber(callReceiverDto.getDestination());

@@ -22,13 +22,13 @@ public class CityDto {
     private String name;
     private Integer prefix;
     private ProvinceDto province;
-    private List<PhonelineDto> lines;
-    private List<RateDto> origins;
-    private List<RateDto> destinations;
+//    private List<PhonelineDto> lines;
+//    private List<RateDto> origins;
+//    private List<RateDto> destinations;
 
     public static CityDto from (City city) {
 
-        List<Phoneline> phonelines = city.getPhonelines();
+        /*List<Phoneline> phonelines = city.getPhonelines();
         List<PhonelineDto> phonelinesDto = null;
         if (phonelines != null)
             phonelinesDto = phonelines.stream().map(x -> PhonelineDto.from(x)).collect(Collectors.toList());
@@ -41,16 +41,16 @@ public class CityDto {
         List<Rate> destinations = city.getDestinations();
         List<RateDto> destinationsDto = null;
         if (destinations != null)
-            destinationsDto = destinations.stream().map(x -> RateDto.from(x)).collect(Collectors.toList());
+            destinationsDto = destinations.stream().map(x -> RateDto.from(x)).collect(Collectors.toList());*/
 
         return CityDto.builder()
                 .id(city.getId())
                 .name(city.getName())
                 .prefix(city.getPrefix())
                 .province(ProvinceDto.from(city.getProvince()))
-                .lines(phonelinesDto)
-                .origins(originsDto)
-                .destinations(destinationsDto)
+//                .lines(phonelinesDto)
+//                .origins(originsDto)
+//                .destinations(destinationsDto)
                 .build();
     }
 }

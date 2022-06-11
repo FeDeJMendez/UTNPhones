@@ -6,7 +6,7 @@ import com.utn.UTNPhones.dto.PhonelineDto;
 import com.utn.UTNPhones.exceptions.PhonelineAssociatedCallsException;
 import com.utn.UTNPhones.exceptions.PhonelineExistsException;
 import com.utn.UTNPhones.exceptions.PhonelineLengthException;
-import com.utn.UTNPhones.exceptions.PhonelineNoExistsException;
+import com.utn.UTNPhones.exceptions.PhonelineNotExistsException;
 import com.utn.UTNPhones.service.backoffice.PhonelineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class PhonelineController {
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addLine(@RequestBody @Validated final PhonelineDto phonelineDto)
             throws PhonelineExistsException, SQLException, PhonelineLengthException {
-        Phoneline newPhoneline = phonelineService.addLine(modelMapper.map(phonelineDto, Phoneline.class));
+        Phoneline newPhoneline = phonelineService.addPhoneline(modelMapper.map(phonelineDto, Phoneline.class));
         return ResponseEntity.created(Conf.getLocation(newPhoneline)).build();
     }
 
@@ -51,7 +51,7 @@ public class PhonelineController {
     ///// Delete Line by Id /////
     @DeleteMapping(value = "/{number}", produces = "application/json")
     public ResponseEntity deletePhonelineById(@PathVariable(value = "number") String number)
-            throws PhonelineNoExistsException, PhonelineAssociatedCallsException {
+            throws PhonelineNotExistsException, PhonelineAssociatedCallsException {
         phonelineService.deletePhonelineByNumber(number);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -59,7 +59,7 @@ public class PhonelineController {
     ///// Low Line /////
     @PutMapping(path = "/low/{number}")
     public ResponseEntity lowPhoneline (@PathVariable String number)
-            throws PhonelineNoExistsException {
+            throws PhonelineNotExistsException {
         phonelineService.lowPhoneline(number);
         return ResponseEntity.ok().build();
     }
@@ -67,7 +67,7 @@ public class PhonelineController {
     ///// High Line /////
     @PutMapping(path = "/high/{number}")
     public ResponseEntity highPhoneline (@PathVariable String number)
-            throws PhonelineNoExistsException {
+            throws PhonelineNotExistsException {
         phonelineService.highPhoneline(number);
         return ResponseEntity.ok().build();
     }
@@ -103,4 +103,5 @@ public class PhonelineController {
 
         return ResponseEntity.ok().build();
     }*/
+
 }

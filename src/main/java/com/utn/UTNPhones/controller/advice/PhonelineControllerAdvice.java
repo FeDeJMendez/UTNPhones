@@ -19,13 +19,23 @@ public class PhonelineControllerAdvice {
         );
     }
 
-    @ExceptionHandler(value = {PhonelineNoExistsException.class})
-    protected ResponseEntity<ErrorBody> phonelineNoExists () {
+    @ExceptionHandler(value = {PhonelineNotExistsException.class})
+    protected ResponseEntity<ErrorBody> phonelineNotExists () {
         return new ResponseEntity(ErrorBody.builder()
                 .code(HttpStatus.NOT_EXTENDED.value())
-                .message("THE LINE NO EXISTS")
+                .message("THE LINE DOES NOT EXISTS")
                 .build(),
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(value = {PhonelineAsignedException.class})
+    protected ResponseEntity<ErrorBody> phonelineAlreadyAsigned () {
+        return new ResponseEntity(ErrorBody.builder()
+                .code(HttpStatus.CONFLICT.value())
+                .message("THE LINE IS ALREADY ASSIGNED")
+                .build(),
+                HttpStatus.CONFLICT
         );
     }
 

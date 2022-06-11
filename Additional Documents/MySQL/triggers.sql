@@ -119,7 +119,18 @@ $$
 
 
 
+##### UPDATE LINE TO CLIENT -> Liquidate calls and create Bill #####
 
+DROP TRIGGER IF EXISTS TBU_LiquidatePhonelineClient;
+DELIMITER $$
+	CREATE TRIGGER TBU_LiquidatePhonelineClient
+		BEFORE DELETE ON persons FOR EACH ROW
+	BEGIN
+		IF ((OLD.phoneline_id != NULL) AND (OLD.phoneline_id != NEW.phoneline_id)) THEN
+			CALL p_GenerateBillPhoneline(IFNULL(OLD.phoneline_id, 0));
+        END IF;
+    END;
+$$
 
 
 

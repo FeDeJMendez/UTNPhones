@@ -27,17 +27,19 @@ public class City implements URIInterface {
     @Column(unique = true)
     private Integer prefix;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "province_id", nullable = false)
     private Province province;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private List<Phoneline> phonelines;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "origin")
     private List<Rate> origins;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
     private List<Rate> destinations;
 }

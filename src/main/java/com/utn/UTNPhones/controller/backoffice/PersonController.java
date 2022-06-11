@@ -8,7 +8,6 @@ import com.utn.UTNPhones.dto.ClientDto;
 import com.utn.UTNPhones.exceptions.*;
 import com.utn.UTNPhones.service.backoffice.BackofficeService;
 import com.utn.UTNPhones.service.backoffice.ClientService;
-import com.utn.UTNPhones.service.backoffice.PersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,14 +23,12 @@ import java.util.List;
 @RequestMapping(value = "/api/backoffice")
 public class PersonController {
 
-    private final PersonService personService;
     private final ClientService clientService;
     private final BackofficeService backofficeService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PersonController(PersonService personService, ClientService clientService, BackofficeService backofficeService, ModelMapper modelMapper) {
-        this.personService = personService;
+    public PersonController(ClientService clientService, BackofficeService backofficeService, ModelMapper modelMapper) {
         this.clientService = clientService;
         this.backofficeService = backofficeService;
         this.modelMapper = modelMapper;
@@ -61,10 +58,12 @@ public class PersonController {
 
     }*/
 
-    ///// Save new client with your new user /////
+    ///// ///// CLIENTS ///// /////
+
+    ///// Save new client /////
     @PostMapping(path = "/clients/", consumes = "application/json")
     public ResponseEntity addClient(@RequestBody @Validated final ClientDto clientDto)
-            throws ClientExistsException, PhonelineNoExistsException, PhonelineBadDataException {
+            throws ClientExistsException, PhonelineNotExistsException, PhonelineBadDataException {
         /*LineDto lineDto = clientDto.getLine();
         if (lineDto == null)
             throw new LineRequiredException();
@@ -83,13 +82,40 @@ public class PersonController {
     }
 
     ///// Delete Client By Dni /////
-    @DeleteMapping(value = "{dni}", produces = "application/json")
+    @DeleteMapping(value = "/clients/{dni}", produces = "application/json")
     public ResponseEntity deleteClientByDni(@PathVariable(value = "dni") Integer dni)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         clientService.deleteByDni(dni);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    ///// Edit Client /////
+    @PutMapping(path = "clients/{dni}", produces = "application/json")
+    public ResponseEntity editClient(@RequestBody ClientDto clientDto, @PathVariable Integer dni)
+            throws ClientNotExistsException {
+        Client editedClient = clientService.editClient(modelMapper.map(clientDto, Client.class), dni);
+        return  ResponseEntity.ok().build();
+    }
+
+    ///// Assign Line to Client/////
+    @PutMapping(path = "/clients/{idClient}/lines/{number}", produces = "application/json")
+    public ResponseEntity assignLineToClient(@PathVariable Integer idClient, @PathVariable String number)
+            throws ClientNotExistsException, PhonelineNotExistsException, PhonelineAsignedException {
+        clientService.assignLineToClient(idClient, number);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    ///// Delete Line to Client /////
+    @PutMapping(path = "/clients/{idClient}/notline", produces = "application/json")
+    public ResponseEntity deleteLineToClient(@PathVariable Integer idClient)
+            throws ClientNotExistsException {
+        clientService.deleteLineToClient(idClient);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
+
+    ///// ///// BACKOFFICE ///// /////
 
     ///// Save new backoffice /////
     @PostMapping(path = "/backoffices/", consumes = "application/json")

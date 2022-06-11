@@ -4,7 +4,7 @@ import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.dto.CallDto;
 import com.utn.UTNPhones.dto.UserDto;
-import com.utn.UTNPhones.exceptions.ClientNoExistsException;
+import com.utn.UTNPhones.exceptions.ClientNotExistsException;
 import com.utn.UTNPhones.service.backoffice.CallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +32,7 @@ public class ClientCallController {
     @GetMapping(path = "/dates/{start}/{end}", produces = "application/json")
     public ResponseEntity<List<CallDto>> getCallsByUserBetweenDates (@PathVariable(value = "start") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
                                                                      @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         UserDto userDto = new UserDto(); userDto.setPerson_id(1); /*(UserDto) auth.getPrincipal();*/
         //// Change this when apply login !!!!!
         List<Call> filteredCalls = callService.getByClientBetweenDates(userDto.getPerson_id(),startDate, endDate);

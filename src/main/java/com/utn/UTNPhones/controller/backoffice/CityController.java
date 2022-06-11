@@ -4,6 +4,8 @@ import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.City;
 import com.utn.UTNPhones.dto.CityDto;
 import com.utn.UTNPhones.exceptions.CityExistsException;
+import com.utn.UTNPhones.exceptions.ProvinceIsRequiredException;
+import com.utn.UTNPhones.exceptions.ProvinceNotExistsException;
 import com.utn.UTNPhones.service.backoffice.CityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,9 @@ public class CityController {
     ///// Save new city /////
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addCity (@RequestBody @Validated final CityDto cityDto)
-            throws CityExistsException {
+            throws CityExistsException, ProvinceIsRequiredException, ProvinceNotExistsException {
+        if (cityDto.getProvince() == null)
+            throw new ProvinceIsRequiredException();
         City newCity = cityService.addCity(modelMapper.map(cityDto, City.class));
         return ResponseEntity.created(Conf.getLocation(newCity)).build();
     }

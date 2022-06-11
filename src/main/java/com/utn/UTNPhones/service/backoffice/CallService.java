@@ -28,7 +28,7 @@ public class CallService {
     public Call addCall(Call newCall)
             throws PhonelineRequiredException, PhonelineEqualException, CallStarttimeIsRequiredException,
             CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException,
-            PhonelineNoExistsException {
+            PhonelineNotExistsException {
         if ((newCall.getOrigin() == null) || (newCall.getDestination() == null))
             throw new PhonelineRequiredException();
         newCall.setOrigin(phonelineService.getById(newCall.getOrigin().getId()));
@@ -58,9 +58,9 @@ public class CallService {
     }
 
     public List<Call> getByClientBetweenDates(Integer idClient, LocalDate startDate, LocalDate endDate)
-            throws ClientNoExistsException {
+            throws ClientNotExistsException {
         if (!clientService.existsById(idClient))
-            throw new ClientNoExistsException();
+            throw new ClientNotExistsException();
         return callRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
 
