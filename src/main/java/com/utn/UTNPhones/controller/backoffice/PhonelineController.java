@@ -7,7 +7,7 @@ import com.utn.UTNPhones.exceptions.PhonelineAssociatedCallsException;
 import com.utn.UTNPhones.exceptions.PhonelineExistsException;
 import com.utn.UTNPhones.exceptions.PhonelineLengthException;
 import com.utn.UTNPhones.exceptions.PhonelineNotExistsException;
-import com.utn.UTNPhones.service.backoffice.PhonelineService;
+import com.utn.UTNPhones.service.roles.PhonelineService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -27,8 +27,9 @@ public interface CallRepository extends JpaRepository<Call, Integer> {
 
     @Query(value = "SELECT * FROM calls c " +
             "INNER JOIN phonelines pl " +
-            "ON c.origin_phoneline_id = ?1  " +
-            "WHERE c.idBill = 0",
+            "ON c.origin_phoneline_id = pl.id  " +
+            "WHERE pl.id = ?1 " +
+            "AND c.idBill = 0",
             nativeQuery = true)
-    List<Call> findUnbilledByPhonelineNumber(Integer id);
+    List<Call> findUnbilledByPhonelineId(Integer id);
 }

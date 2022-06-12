@@ -4,7 +4,7 @@ import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.dto.CallDto;
 import com.utn.UTNPhones.exceptions.*;
-import com.utn.UTNPhones.service.backoffice.CallService;
+import com.utn.UTNPhones.service.roles.CallService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,6 +53,17 @@ public class CallController {
                                                                      @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
             throws ClientNotExistsException {
         List<Call> filteredCalls = callService.getByClientBetweenDates(idClient, startDate, endDate);
+        List<CallDto> filteredCallsDto = Conf.listCallsToDto(filteredCalls);
+        return ResponseEntity
+                .status(filteredCallsDto.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT)
+                .body(filteredCallsDto);
+    }
+
+    ///// Get Unbilled By Phoneline Number /////
+    @GetMapping(path = "/phonelines/{number}/unbilled", produces = "application/json")
+    public ResponseEntity<List<CallDto>> getCallsUnbilledByPhonelineNumber (@PathVariable String number)
+            throws PhonelineNotExistsException {
+        List<Call> filteredCalls = callService.getUnbilledByPhonelineNumber(number);
         List<CallDto> filteredCallsDto = Conf.listCallsToDto(filteredCalls);
         return ResponseEntity
                 .status(filteredCallsDto.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT)

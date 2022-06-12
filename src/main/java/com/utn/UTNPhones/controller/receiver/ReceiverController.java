@@ -4,8 +4,8 @@ import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.*;
-import com.utn.UTNPhones.service.backoffice.CallService;
-import com.utn.UTNPhones.service.backoffice.PhonelineService;
+import com.utn.UTNPhones.service.roles.CallService;
+import com.utn.UTNPhones.service.roles.PhonelineService;
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -42,7 +42,7 @@ public class ReceiverController {
     @PostMapping(consumes = "application/json")
     public ResponseEntity receiveCall (@RequestBody @Validated final CallReceiverDto callReceiverDto)
             throws PhonelineNotExistsException, PhonelineEqualException, PhonelineRequiredException, CallStarttimeIsRequiredException,
-            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException, SQLException {
+            CallDurationIsRequiredException, PhonelineOriginLowException, PhonelineDestinationLowException {
         Phoneline origin = phonelineService.getByNumber(callReceiverDto.getOrigin());
         Phoneline destination = phonelineService.getByNumber(callReceiverDto.getDestination());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");

@@ -6,8 +6,9 @@ import com.utn.UTNPhones.domain.Client;
 import com.utn.UTNPhones.dto.BackofficeDto;
 import com.utn.UTNPhones.dto.ClientDto;
 import com.utn.UTNPhones.exceptions.*;
-import com.utn.UTNPhones.service.backoffice.BackofficeService;
-import com.utn.UTNPhones.service.backoffice.ClientService;
+import com.utn.UTNPhones.service.UserService;
+import com.utn.UTNPhones.service.roles.BackofficeService;
+import com.utn.UTNPhones.service.roles.ClientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,12 +26,14 @@ public class PersonController {
 
     private final ClientService clientService;
     private final BackofficeService backofficeService;
+    private final UserService userService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public PersonController(ClientService clientService, BackofficeService backofficeService, ModelMapper modelMapper) {
+    public PersonController(ClientService clientService, BackofficeService backofficeService, UserService userService, ModelMapper modelMapper) {
         this.clientService = clientService;
         this.backofficeService = backofficeService;
+        this.userService = userService;
         this.modelMapper = modelMapper;
     }
 
@@ -70,7 +73,7 @@ public class PersonController {
         if ((lineDto.getId() == null) && (lineDto.getNumber() == null))
             throw new LineBadDataException();*/
         Client newClient = clientService.addClient(modelMapper.map(clientDto, Client.class));
-//        userService.addUser(newClient);
+        userService.addUser(newClient);
         return ResponseEntity.created(Conf.getLocation(newClient)).build();
     }
 
@@ -122,6 +125,7 @@ public class PersonController {
     public ResponseEntity addBackoffice(@RequestBody @Validated final BackofficeDto backofficeDto)
             throws BackofficeExistsException {
         Backoffice newBackoffice = backofficeService.addBackoffice(modelMapper.map(backofficeDto, Backoffice.class));
+        userService.addUser(newBackoffice);
         return ResponseEntity.created(Conf.getLocation(newBackoffice)).build();
     }
 
@@ -130,5 +134,13 @@ public class PersonController {
     public ResponseEntity<List<BackofficeDto>> allBackoffice(Pageable pageable) {
         Page<Backoffice> page = backofficeService.getAll(pageable);
         return Conf.response(page);
+    }
+
+    ///// Delete Backoffice By Dni /////
+    @DeleteMapping(value = "/backoffices/{dni}", produces = "application/json")
+    public ResponseEntity deleteBackofficeByDni(@PathVariable(value = "dni") Integer dni)
+            throws BackofficeNotExistsException {
+        backofficeService.deleteByDni(dni);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

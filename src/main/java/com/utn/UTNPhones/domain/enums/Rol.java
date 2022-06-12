@@ -1,9 +1,12 @@
 package com.utn.UTNPhones.domain.enums;
 
 public enum Rol {
-    CLIENT("client"),
-    BACKOFFICE("backoffice"),
-    INFRASTRUCTURE("infrastructure");
+    ROLE_CLIENT,
+    ROLE_BACKOFFICE;
+
+    /*CLIENT ("client"),
+    BACKOFFICE ("backoffice"),
+    INFRASTRUCTURE ("infrastructure");
 
     private String description;
 
@@ -22,5 +25,5 @@ public enum Rol {
 
     public String getDescription() {
         return description;
-    }
+    }*/
 }

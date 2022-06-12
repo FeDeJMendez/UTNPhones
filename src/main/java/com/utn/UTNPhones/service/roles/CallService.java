@@ -1,6 +1,7 @@
-package com.utn.UTNPhones.service.backoffice;
+package com.utn.UTNPhones.service.roles;
 
 import com.utn.UTNPhones.domain.Call;
+import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.*;
 import com.utn.UTNPhones.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,10 @@ public class CallService {
         return callRepository.findByClientBetweenDates(idClient,startDate,endDate);
     }
 
-    public List<Call> getUnbilledByPhonelineNumber(Integer id) {
-        return callRepository.findUnbilledByPhonelineNumber(id);
+    public List<Call> getUnbilledByPhonelineNumber(String number)
+            throws PhonelineNotExistsException {
+        Phoneline phoneline = phonelineService.getByNumber(number);
+        return callRepository.findUnbilledByPhonelineId(phoneline.getId());
     }
 
 }

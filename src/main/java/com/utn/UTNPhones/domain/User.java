@@ -20,23 +20,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(length = 50)
+    @Column/*(length = 50)*/
     String username;
 
     @JsonIgnore
-    @Column(length = 50)
-    String passworduser;
+    @Column/*(length = 50)*/
+    String password;
 
-    @Column(name = "rol", length = 31)
+    @Column(name = "rol"/*, length = 31*/)
     @Enumerated(EnumType.STRING)
     Rol rol;
 
     @Column
     Integer person_id;
 
-    public User(String lastname, String pass, Rol roleClient, Integer person_id) {
+    public User(String lastname, String dni, Rol roleClient, Integer person_id) {
         this.username = lastname;
-        this.passworduser = pass;
+        this.password = dni;
         this.rol = roleClient;
         this.person_id = person_id;
     }

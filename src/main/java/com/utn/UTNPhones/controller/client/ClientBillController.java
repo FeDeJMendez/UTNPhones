@@ -5,11 +5,12 @@ import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.dto.BillDto;
 import com.utn.UTNPhones.dto.UserDto;
 import com.utn.UTNPhones.exceptions.ClientNotExistsException;
-import com.utn.UTNPhones.service.backoffice.BillService;
+import com.utn.UTNPhones.service.roles.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +33,10 @@ public class ClientBillController {
     ///// Get All Bills Between Dates /////
     @GetMapping(path = "/dates/{start}/{end}", produces = "application/json")
     public ResponseEntity<List<BillDto>> getBillsByUserBetweenDates (@PathVariable(value = "start") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
-                                                                     @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
+                                                                     @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate,
+                                                                     Authentication authentication)
             throws ClientNotExistsException {
-        UserDto userDto = new UserDto(); userDto.setPerson_id(1); /*(UserDto) auth.getPrincipal();*/
-        //// Change this when apply login !!!!!
+        UserDto userDto = (UserDto) authentication.getPrincipal();
         List<Bill> filteredBills = billService.getByClientBetweenDates(userDto.getPerson_id(),startDate, endDate);
         List<BillDto> filteredBillsDto = Conf.listBillsToDto(filteredBills);
         return ResponseEntity

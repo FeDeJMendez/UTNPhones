@@ -1,4 +1,4 @@
-package com.utn.UTNPhones.service.backoffice;
+package com.utn.UTNPhones.service.roles;
 
 import com.utn.UTNPhones.domain.*;
 import com.utn.UTNPhones.exceptions.*;
@@ -58,8 +58,8 @@ public class ClientService {
 
     public void deleteByDni(Integer dni)
             throws ClientNotExistsException {
-        Person person = this.getByDni(dni);
-        clientRepository.deleteById(person.getId());
+        Client client = this.getByDni(dni);
+        clientRepository.deleteById(client.getId());
     }
 
     public Client editClient(Client client, Integer dni)

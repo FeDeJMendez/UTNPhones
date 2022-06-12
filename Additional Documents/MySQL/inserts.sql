@@ -27,13 +27,17 @@ INSERT INTO rates(price, starttime, endtime, origin_city_id, destination_city_id
 TRUNCATE TABLE phonelines;
 INSERT INTO phonelines (number)
 	VALUES ('2235583444'), ('2254583444'), ('1147475566'), ('2215588144');
-    
-    
+
 TRUNCATE TABLE persons;
 INSERT INTO persons (DTYPE, name, lastname, dni, phoneline_id)
-	VALUES ('CLIENT', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), 
+	VALUES ('BACKOFFICE', 'Juan', 'Perez', 11123456, 1), ('CLIENT', 'Pepe', 'Juarez', 22123456, 2), 
 		('CLIENT', 'Martin', 'Ramirez', 33123456, 3), ('CLIENT', 'Ramiro', 'Martinez', 44123456, 4 );
 
+TRUNCATE TABLE users;
+INSERT INTO users(username, password, rol, person_id) 
+	VALUES ('backoffice1', '1234', 'ROLE_BACKOFFICE', 1), 
+		('client1','1234', 'ROLE_CLIENT',2), 
+        ('infrastructure1','1234', 'ROLE_INFRASTRUCTURE', 0);
 
 
 TRUNCATE TABLE calls;

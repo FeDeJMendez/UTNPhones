@@ -4,7 +4,7 @@ import com.utn.UTNPhones.config.Conf;
 import com.utn.UTNPhones.domain.Bill;
 import com.utn.UTNPhones.dto.BillDto;
 import com.utn.UTNPhones.exceptions.ClientNotExistsException;
-import com.utn.UTNPhones.service.backoffice.BillService;
+import com.utn.UTNPhones.service.roles.BillService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

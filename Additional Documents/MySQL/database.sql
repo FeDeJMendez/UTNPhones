@@ -5,6 +5,17 @@ USE utnphones;
 
 	##### Creación de tablas #####
 
+DROP TABLE IF EXISTS users;
+CREATE TABLE IF NOT EXISTS users(
+    id int auto_increment,
+    username varchar(50),
+    password varchar(50),
+    rol varchar(31),
+    person_id int,
+    --
+    constraint pk_idUser primary key (id)
+);
+
 DROP TABLE IF EXISTS persons;
 CREATE TABLE IF NOT EXISTS persons(
 	DTYPE varchar(31),
@@ -94,17 +105,6 @@ CREATE TABLE IF NOT EXISTS bills(
     paid bit,
     --
     constraint pk_idBill primary key (id)
-);
-
-DROP TABLE IF EXISTS users;
-CREATE TABLE IF NOT EXISTS users(
-    id int auto_increment,
-    username varchar(50),
-    passworduser varchar(50),
-    rol varchar(31),
-    id_person int,
-    --
-    constraint pk_idUser primary key (id)
 );
 
 

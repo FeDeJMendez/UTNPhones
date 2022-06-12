@@ -1,7 +1,8 @@
-package com.utn.UTNPhones.service.backoffice;
+package com.utn.UTNPhones.service.roles;
 
 import com.utn.UTNPhones.domain.Backoffice;
 import com.utn.UTNPhones.exceptions.BackofficeExistsException;
+import com.utn.UTNPhones.exceptions.BackofficeNotExistsException;
 import com.utn.UTNPhones.repository.BackofficeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,4 +29,17 @@ public class BackofficeService {
     public Page<Backoffice> getAll(Pageable pageable) {
         return backofficeRepository.findAll(pageable);
     }
+
+    private Backoffice getByDni(Integer dni)
+            throws BackofficeNotExistsException {
+        return backofficeRepository.findByDni(dni)
+                .orElseThrow(BackofficeNotExistsException::new);
+    }
+
+    public void deleteByDni(Integer dni)
+            throws BackofficeNotExistsException {
+        Backoffice backoffice = this.getByDni(dni);
+        backofficeRepository.deleteById(backoffice.getId());
+    }
+
 }
