@@ -13,7 +13,7 @@ import lombok.*;
 @JsonTypeName("CLIENT")
 @EqualsAndHashCode(callSuper = true)
 public class ClientDto extends PersonDto{
-    private PhonelineDto phonelineDto;
+    private PhonelineDto phoneline;
 
     public static ClientDto from (Client client) {
         ClientDto clientDto = new ClientDto();
@@ -21,7 +21,7 @@ public class ClientDto extends PersonDto{
         clientDto.setName(client.getName());
         clientDto.setLastname(client.getLastname());
         clientDto.setDni(client.getDni());
-        clientDto.setPhonelineDto(PhonelineDto.from(client.getPhoneline()));
+        clientDto.setPhoneline(PhonelineDto.from(client.getPhoneline()));
         return clientDto;
     }
 }

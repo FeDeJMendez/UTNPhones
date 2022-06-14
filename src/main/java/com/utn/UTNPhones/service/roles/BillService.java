@@ -24,13 +24,6 @@ public class BillService {
     }
 
 
-    public Bill addBill(Bill newBill) {
-        newBill.setPaid(false);
-        newBill.setExpiration(newBill.getDatecreation().plusDays(15));
-        newBill.setCostprice(newBill.getTotalprice() / 1.21);
-        return billRepository.save(newBill);
-    }
-
     public Page getAll(Pageable pageable) {
         return billRepository.findAll(pageable);
     }

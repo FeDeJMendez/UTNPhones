@@ -1,6 +1,8 @@
 package com.utn.UTNPhones.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.utn.UTNPhones.dto.PhonelineDto;
+import com.utn.UTNPhones.dto.RateDto;
 import com.utn.UTNPhones.utils.URIInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +39,20 @@ public class Rate implements URIInterface {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "destination_city_id", nullable = false)
     private City destination;
+
+    public static Rate from (RateDto rateDto) {
+        return Rate.builder()
+//                .id(rateDto.getId())
+                .price(rateDto.getPrice())
+                .starttime(rateDto.getStarttime())
+                .endtime(rateDto.getEndtime())
+                .origin(City.builder()
+                        .id(rateDto.getOrigin().getId())
+                        .build())
+                .destination(City.builder()
+                        .id(rateDto.getDestination().getId())
+                        .build())
+                .build();
+    }
+
 }

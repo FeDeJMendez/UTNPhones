@@ -72,14 +72,15 @@ public class PersonController {
             throw new LineRequiredException();
         if ((lineDto.getId() == null) && (lineDto.getNumber() == null))
             throw new LineBadDataException();*/
-        Client newClient = clientService.addClient(modelMapper.map(clientDto, Client.class));
+//        Client newClient = clientService.addClient(modelMapper.map(clientDto, Client.class));
+        Client newClient = clientService.addClient(Client.from(clientDto));
         userService.addUser(newClient);
         return ResponseEntity.created(Conf.getLocation(newClient)).build();
     }
 
     ///// Get all Clients /////
     @GetMapping(path = "/clients/", produces = "application/json")
-    public ResponseEntity<List<ClientDto>> allClients(Pageable pageable) {
+    public ResponseEntity<List<ClientDto>> getAllClients(Pageable pageable) {
         Page<Client> page = clientService.getAll(pageable);
         return Conf.response(page);
     }
@@ -96,7 +97,8 @@ public class PersonController {
     @PutMapping(path = "clients/{dni}", produces = "application/json")
     public ResponseEntity editClient(@RequestBody ClientDto clientDto, @PathVariable Integer dni)
             throws ClientNotExistsException {
-        Client editedClient = clientService.editClient(modelMapper.map(clientDto, Client.class), dni);
+//        Client editedClient = clientService.editClient(modelMapper.map(clientDto, Client.class), dni);
+        Client editedClient = clientService.editClient(Client.from(clientDto), dni);
         return  ResponseEntity.ok().build();
     }
 
@@ -131,7 +133,7 @@ public class PersonController {
 
     ///// Get all Backoffices /////
     @GetMapping(path = "/backoffices/", produces = "application/json")
-    public ResponseEntity<List<BackofficeDto>> allBackoffice(Pageable pageable) {
+    public ResponseEntity<List<BackofficeDto>> getAllBackoffice(Pageable pageable) {
         Page<Backoffice> page = backofficeService.getAll(pageable);
         return Conf.response(page);
     }

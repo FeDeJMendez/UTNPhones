@@ -22,26 +22,24 @@ import java.util.List;
 @RequestMapping(value = "/api/backoffice/calls")
 public class CallController {
     private final CallService callService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public CallController(CallService callService, ModelMapper modelMapper) {
+    public CallController(CallService callService) {
         this.callService = callService;
-        this.modelMapper = modelMapper;
     }
 
-    ///// Add New Call /////
+    /*///// Add New Call /////
     @PostMapping(path = "/", consumes = "application/json")
     public ResponseEntity addCall (@RequestBody @Validated final CallDto callDto)
             throws CallStarttimeIsRequiredException, CallDurationIsRequiredException, PhonelineRequiredException,
             PhonelineEqualException, PhonelineDestinationLowException, PhonelineOriginLowException, PhonelineNotExistsException {
         Call newCall = callService.addCall(modelMapper.map(callDto, Call.class));
         return ResponseEntity.created(Conf.getLocation(newCall)).build();
-    }
+    }*/
 
     ///// Get All Calls /////
     @GetMapping(path = "/", produces = "application/json")
-    public ResponseEntity<List<Call>> allCalls (Pageable pageable) {
+    public ResponseEntity<List<CallDto>> getAllCalls (Pageable pageable) {
         Page page = callService.getAll(pageable);
         return Conf.response(page);
     }

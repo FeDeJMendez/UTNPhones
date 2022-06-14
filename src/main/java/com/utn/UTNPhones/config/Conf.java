@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class Conf {
+
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
@@ -55,4 +56,5 @@ public class Conf {
                 map(x -> BillDto.from(x)).
                 collect(Collectors.toList());
     }
+
 }

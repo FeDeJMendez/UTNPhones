@@ -21,14 +21,10 @@ import java.util.List;
 @RequestMapping(value = "/api/backoffice/rates")
 public class RateController {
     private final RateService rateService;
-    private final CityService cityService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public RateController(RateService rateService, CityService cityService, ModelMapper modelMapper) {
+    public RateController(RateService rateService) {
         this.rateService = rateService;
-        this.cityService = cityService;
-        this.modelMapper = modelMapper;
     }
 
 
@@ -43,7 +39,6 @@ public class RateController {
             throw new RatePriceIsRequiredException();
         if ((rateDto.getStarttime() == null) || (rateDto.getEndtime() == null))
             throw new RateTimeRangeIsRequiredException();
-        Rate newRate = rateService.addRate(modelMapper.map(rateDto, Rate.class)); // DOES NOT MAP CITIES WELL
         /*Rate newRate = rateService.addRate(Rate.builder()
                 .price(rateDto.getPrice())
                 .start(rateDto.getStart())
@@ -51,12 +46,14 @@ public class RateController {
                 .origin(cityService.getById(rateDto.getOrigin().getId()))
                 .destination(cityService.getById(rateDto.getDestination().getId()))
                 .build());*/
+//        Rate newRate = rateService.addRate(modelMapper.map(rateDto, Rate.class)); // DOES NOT MAP CITIES WELL
+        Rate newRate = rateService.addRate(Rate.from(rateDto));
         return ResponseEntity.created(Conf.getLocation(newRate)).build();
     }
 
     ///// Get All Rates /////
     @GetMapping(path = "/", produces = "application/json")
-    public ResponseEntity<List<Rate>> allRates (Pageable pageable) {
+    public ResponseEntity<List<RateDto>> getAllRates (Pageable pageable) {
         Page<Rate> page = rateService.getAll(pageable);
         return Conf.response(page);
     }

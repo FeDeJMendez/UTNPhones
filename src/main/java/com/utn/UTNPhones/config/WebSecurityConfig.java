@@ -1,6 +1,7 @@
 package com.utn.UTNPhones.config;
 
 import com.utn.UTNPhones.utils.JWTAuthorizationFilter;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2console/**").permitAll()
                 .antMatchers("/v3/api-docs/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/api/backoffice/**").hasRole("BACKOFFICE")
                 .antMatchers("/api/client/**").hasRole("CLIENT")
                 //.antMatchers("/api/receiver").hasRole("INFRASTRUCTURE")

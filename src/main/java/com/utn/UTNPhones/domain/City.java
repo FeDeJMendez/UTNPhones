@@ -1,11 +1,13 @@
 package com.utn.UTNPhones.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.utn.UTNPhones.dto.CityDto;
 import com.utn.UTNPhones.utils.URIInterface;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -42,4 +44,15 @@ public class City implements URIInterface {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "destination")
     private List<Rate> destinations;
+
+    public static City from (CityDto cityDto) {
+        return City.builder()
+//                .id(cityDto.getId())
+                .name(cityDto.getName())
+                .prefix(cityDto.getPrefix())
+                .province(Province.builder()
+                        .id(cityDto.getProvince().getId())
+                        .build())
+                .build();
+    }
 }

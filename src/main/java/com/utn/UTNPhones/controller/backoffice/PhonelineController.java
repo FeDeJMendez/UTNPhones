@@ -24,33 +24,32 @@ import java.util.List;
 @RequestMapping(value = "/api/backoffice/phonelines")
 public class PhonelineController {
 
-    private PhonelineService phonelineService;
-    private ModelMapper modelMapper;
+    private final PhonelineService phonelineService;
 
     @Autowired
-    public PhonelineController(PhonelineService phonelineService, ModelMapper modelMapper) {
+    public PhonelineController(PhonelineService phonelineService) {
         this.phonelineService = phonelineService;
-        this.modelMapper = modelMapper;
     }
 
     ///// Save new Line/////
     @PostMapping(path = "/", consumes = "application/json")
-    public ResponseEntity addLine(@RequestBody @Validated final PhonelineDto phonelineDto)
+    public ResponseEntity addPhoneline(@RequestBody @Validated final PhonelineDto phonelineDto)
             throws PhonelineExistsException, SQLException, PhonelineLengthException {
-        Phoneline newPhoneline = phonelineService.addPhoneline(modelMapper.map(phonelineDto, Phoneline.class));
+//        Phoneline newPhoneline = phonelineService.addPhoneline(modelMapper.map(phonelineDto, Phoneline.class));
+        Phoneline newPhoneline = phonelineService.addPhoneline(Phoneline.from(phonelineDto));
         return ResponseEntity.created(Conf.getLocation(newPhoneline)).build();
     }
 
     ///// Get all Lines /////
     @GetMapping(path = "/", produces = "application/json")
-    public ResponseEntity<List<PhonelineDto>> allPhonelines(Pageable pageable){
+    public ResponseEntity<List<PhonelineDto>> getAllPhonelines(Pageable pageable){
         Page<Phoneline> page = phonelineService.getAll(pageable);
         return Conf.response(page);
     }
 
     ///// Delete Line by Id /////
     @DeleteMapping(value = "/{number}", produces = "application/json")
-    public ResponseEntity deletePhonelineById(@PathVariable(value = "number") String number)
+    public ResponseEntity deletePhonelineByNumber(@PathVariable(value = "number") String number)
             throws PhonelineNotExistsException, PhonelineAssociatedCallsException {
         phonelineService.deletePhonelineByNumber(number);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -64,7 +63,7 @@ public class PhonelineController {
         return ResponseEntity.ok().build();
     }
 
-    ///// High Line /////
+    ///// High Phoneine /////
     @PutMapping(path = "/high/{number}")
     public ResponseEntity highPhoneline (@PathVariable String number)
             throws PhonelineNotExistsException {

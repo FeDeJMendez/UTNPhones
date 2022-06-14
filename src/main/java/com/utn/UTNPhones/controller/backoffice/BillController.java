@@ -22,42 +22,34 @@ import java.util.List;
 @RequestMapping(value = "/api/backoffice/bills")
 public class BillController {
     private final BillService billService;
-    private final ModelMapper modelMapper;
 
     @Autowired
-    public BillController(BillService billService, ModelMapper modelMapper) {
+    public BillController(BillService billService) {
         this.billService = billService;
-        this.modelMapper = modelMapper;
     }
 
-    ///// Add New  Bill /////
-    @PostMapping(path = "/", consumes = "application/json")
-    public ResponseEntity addBill (@RequestBody @Validated final BillDto billDto) {
-        Bill newBill = billService.addBill(modelMapper.map(billDto, Bill.class));
-        return ResponseEntity.created(Conf.getLocation(newBill)).build();
-    }
 
     ///// Get All Bills /////
     @GetMapping(path = "/", produces = "application/json")
-    public ResponseEntity<List<Bill>> allBills (Pageable pageable) {
+    public ResponseEntity<List<BillDto>> getAllBills (Pageable pageable) {
         Page page = billService.getAll(pageable);
         return Conf.response(page);
     }
 
     ///// Get Bills by Client /////
     @GetMapping(path = "/clients/{idClient}", produces = "application/json")
-    public ResponseEntity<List<BillDto>> byClient (@PathVariable Integer idClient)
+    public ResponseEntity<List<BillDto>> getByClient (@PathVariable Integer idClient)
             throws ClientNotExistsException {
         List<Bill> filteredBills = billService.getByClient(idClient);
-        List<BillDto> filteredCallsDto = Conf.listBillsToDto(filteredBills);
+        List<BillDto> filteredBillsDto = Conf.listBillsToDto(filteredBills);
         return ResponseEntity
-                .status(filteredCallsDto.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT)
-                .body(filteredCallsDto);
+                .status(filteredBillsDto.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT)
+                .body(filteredBillsDto);
     }
 
     ///// Get Bills by Client and Time Range (Between Dates) /////
     @GetMapping(path = "/clients/{idClient}/dates/{start}/{end}", produces = "application/json")
-    public ResponseEntity<List<BillDto>> getBillsByUserBetweenDates (@PathVariable Integer idClient,
+    public ResponseEntity<List<BillDto>> getBillsByClientBetweenDates (@PathVariable Integer idClient,
                                                                      @PathVariable(value = "start") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
                                                                      @PathVariable(value = "end") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate)
             throws ClientNotExistsException {

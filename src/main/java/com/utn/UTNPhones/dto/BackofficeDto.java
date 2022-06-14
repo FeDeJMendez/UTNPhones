@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 //@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeName("BACKOFFICE")
