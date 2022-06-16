@@ -10,6 +10,7 @@ DELIMITER $$
         SET NEW.city_id = f_FindCity(NEW.number);
     END;
 $$
+DELIMITER ;
 
 
 
@@ -34,6 +35,7 @@ DELIMITER $$
 		END IF;
     END;
 $$
+DELIMITER ;
 
 
 
@@ -49,6 +51,7 @@ DELIMITER $$
         END IF;
     END;
 $$
+DELIMITER ;
 
 
 
@@ -84,6 +87,7 @@ DELIMITER $$
         SET NEW.total = vTotal;
     END;
 $$
+DELIMITER ;
 
 
 
@@ -103,6 +107,7 @@ DELIMITER $$
         SET NEW.paid = false;        
     END;
 $$
+DELIMITER ;
 
 
 
@@ -116,6 +121,7 @@ DELIMITER $$
 		CALL p_GenerateBillPhoneline(IFNULL(OLD.phoneline_id, 0));
     END;
 $$
+DELIMITER ;
 
 
 
@@ -131,6 +137,7 @@ DELIMITER $$
         END IF;
     END;
 $$
+DELIMITER ;
 
 
 

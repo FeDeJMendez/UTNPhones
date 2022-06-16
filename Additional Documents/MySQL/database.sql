@@ -1,3 +1,4 @@
+
 DROP DATABASE utnphones;
 CREATE DATABASE utnphones;
 USE utnphones;
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS persons(
     --
     constraint pk_idPerson primary key (id),
     constraint u_dni unique(dni),
-    constraint u_dni unique(phoneline_id),
+    constraint u_phoneline unique(phoneline_id),
     foreign key fk_phoneline (phoneline_id) references phonelines (id)
 );
 

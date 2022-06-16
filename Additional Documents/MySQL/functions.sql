@@ -19,6 +19,7 @@ BEGIN
 	RETURN vIdCity;
 END;
 $$
+DELIMITER ;
 
 
 
@@ -86,7 +87,7 @@ BEGIN
     RETURN vTotal;
 END;
 $$
-
+DELIMITER ;
 
 
 

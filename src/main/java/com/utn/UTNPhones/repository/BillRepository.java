@@ -13,11 +13,13 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<Bill, Integer> {
     Page<Bill> findAll (Pageable pageable);
 
-    @Query(value = "SELECT * FROM bills b " +
+    /*@Query(value = "SELECT * FROM bills b " +
             "INNER JOIN persons p " +
             "ON p.dni = b.dni " +
             "WHERE p.id = :idClient " +
             "AND b.datecreation BETWEEN :startDate AND :endDate",
+            nativeQuery = true)*/
+    @Query(value = "CALL p_BillsByClientBetweenDates (:idClient, :startDate, :endDate)",
             nativeQuery = true)
     List<Bill> findByClientBetweenDates(@Param("idClient")  Integer idClient,
                                         @Param("startDate") LocalDate startDate,

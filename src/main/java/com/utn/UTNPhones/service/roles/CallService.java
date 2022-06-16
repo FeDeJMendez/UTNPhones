@@ -1,8 +1,10 @@
 package com.utn.UTNPhones.service.roles;
 
 import com.utn.UTNPhones.domain.Call;
+import com.utn.UTNPhones.domain.CallMongo;
 import com.utn.UTNPhones.domain.Phoneline;
 import com.utn.UTNPhones.exceptions.*;
+import com.utn.UTNPhones.repository.CallMongoRepository;
 import com.utn.UTNPhones.repository.CallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,11 +20,14 @@ public class CallService {
     private final PhonelineService phonelineService;
     private final ClientService clientService;
 
+    private final CallMongoRepository callMongoRepository;
+
     @Autowired
-    public CallService(CallRepository callRepository, PhonelineService phonelineService, ClientService clientService) {
+    public CallService(CallRepository callRepository, PhonelineService phonelineService, ClientService clientService, CallMongoRepository callMongoRepository) {
         this.callRepository = callRepository;
         this.phonelineService = phonelineService;
         this.clientService = clientService;
+        this.callMongoRepository = callMongoRepository;
     }
 
 
@@ -46,6 +51,20 @@ public class CallService {
             throw new PhonelineDestinationLowException();
         Double total = 0.0;
         newCall.setTotal(total);
+
+        /*Call addedCall = callRepository.save(newCall);
+
+        CallMongo callMongo = CallMongo.builder()
+                .originNumber(addedCall.getOrigin().getNumber())
+                .originCityName(addedCall.getOrigin().getCity().getName())
+                .destinationNumber(addedCall.getDestination().getNumber())
+                .destinationCityName(addedCall.getDestination().getCity().getName())
+                .total(addedCall.getTotal())
+                .duration(addedCall.getDuration())
+                .starttime(addedCall.getStarttime())
+                .build();
+        callMongoRepository.save(callMongo);*/
+
         return callRepository.save(newCall);
         /*try {
             return callRepository.save(newCall);

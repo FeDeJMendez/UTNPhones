@@ -1,9 +1,7 @@
 package com.utn.UTNPhones.controller.backoffice;
 
 import com.utn.UTNPhones.config.Conf;
-import com.utn.UTNPhones.domain.Call;
 import com.utn.UTNPhones.domain.City;
-import com.utn.UTNPhones.dto.CallDto;
 import com.utn.UTNPhones.dto.CityDto;
 import com.utn.UTNPhones.exceptions.CityExistsException;
 import com.utn.UTNPhones.exceptions.ProvinceIsRequiredException;
@@ -14,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-import static com.utn.UTNPhones.TestUtils.CallTestUtils.getCallList;
 import static com.utn.UTNPhones.TestUtils.CityTestUtils.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -107,6 +103,5 @@ public class CityControllerTest {
             fail("Unexpected Exception!");
         }
     }
-
 
 }

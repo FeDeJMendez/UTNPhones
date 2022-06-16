@@ -30,6 +30,74 @@ DELIMITER $$
 				AND idBill = 0;
     END;
 $$
+DELIMITER ;
 
+
+
+##### Return the Calls of a Client BY Date using the view v_CallsByClient #####
+
+DROP PROCEDURE IF EXISTS p_CallsByClientAndDate;
+DELIMITER $$
+	CREATE PROCEDURE p_CallsByClientAndDate (
+    in vIdClient int,
+    in vdateCalls date
+    )
+    BEGIN
+		SELECT originNumber,
+			originCityName,
+			destinationNumber,
+			destinationCityName,
+			total,
+			duration,
+			starttime
+		FROM v_CallsByClient
+			WHERE idClient = vIdClient
+			AND DATE(starttime) = vdateCalls;
+    END;
+$$
+DELIMITER ;
+
+## SELECT * FROM calls;
+## CALL p_CallsByClientAndDate (2, "2018-02-16", "2018-02-17");
+
+
+
+##### Return the Calls of a Client BETWEEN Dates using the view v_Calls #####
+
+DROP PROCEDURE IF EXISTS p_CallsByClientBetweenDates;
+DELIMITER $$
+	CREATE PROCEDURE p_CallsByClientBetweenDates (
+    in vIdClient int,
+    in vdateStartCalls date,
+    in vdateEndCalls date
+    )
+    BEGIN
+		SELECT id, starttime, duration,total, idBill, origin_phoneline_id, destination_phoneline_id
+		FROM v_Calls
+			WHERE idClient = vIdClient
+				AND DATE(starttime) BETWEEN vdateStartCalls AND vdateEndCalls;
+    END;
+$$
+DELIMITER ;
+
+
+
+##### Return the Bills of a Client BETWEEN Dates using the view v_Bills #####
+
+DROP PROCEDURE IF EXISTS p_BillsByClientBetweenDates;
+DELIMITER $$
+	CREATE PROCEDURE p_BillsByClientBetweenDates (
+    in vIdClient int,
+    in vdateStartCalls date,
+    in vdateEndCalls date
+    )
+    BEGIN
+		SELECT id, dni, number, totalcalls, costprice, totalprice, datecreation, expiration, paid
+		FROM v_Bills
+			WHERE idClient = vIdClient
+				AND DATE(datecreation) BETWEEN vdateStartCalls AND vdateEndCalls;
+    END;
+$$
+DELIMITER ;
 
 

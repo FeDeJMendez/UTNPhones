@@ -47,7 +47,7 @@ DELIMITER $$
         CLOSE curPhonelineBill;
     END;
 $$
-
+DELIMITER ;
 
 
 ##### Monthly Event (1st of Month) #####
@@ -65,7 +65,7 @@ CREATE EVENT e_Billing
 		END IF;
     END;
 $$
-
+DELIMITER ;
 
 
 ##### Test Event #####

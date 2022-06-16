@@ -15,11 +15,13 @@ import java.util.List;
 public interface CallRepository extends JpaRepository<Call, Integer> {
     Page<Call> findAll(Pageable pageable);
 
-    @Query(value = "SELECT * FROM calls c " +
+    /*@Query(value = "SELECT * FROM v_Calls c " +
             "INNER JOIN persons p " +
             "ON p.phoneline_id = c.origin_phoneline_id " +
             "WHERE p.id = :idClient " +
             "AND c.starttime BETWEEN :startDate AND :endDate",
+            nativeQuery = true)*/
+    @Query(value = "CALL p_CallsByClientBetweenDates (:idClient, :startDate, :endDate)",
             nativeQuery = true)
     List<Call> findByClientBetweenDates(@Param("idClient")  Integer idClient,
                                         @Param("startDate") LocalDate startDate,

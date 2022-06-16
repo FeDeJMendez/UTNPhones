@@ -23,6 +23,7 @@ public class Client extends Person {
     @JoinColumn(name = "phoneline_id ", unique = true)
     private Phoneline phoneline;
 
+
     public static Client from (ClientDto clientDto) {
         /*Phoneline phoneline = Phoneline.builder()
                 .id(clientDto.getPhoneline().getId())

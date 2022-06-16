@@ -67,11 +67,6 @@ public class PersonController {
     @PostMapping(path = "/clients/", consumes = "application/json")
     public ResponseEntity addClient(@RequestBody @Validated final ClientDto clientDto)
             throws ClientExistsException, PhonelineNotExistsException, PhonelineBadDataException {
-        /*LineDto lineDto = clientDto.getLine();
-        if (lineDto == null)
-            throw new LineRequiredException();
-        if ((lineDto.getId() == null) && (lineDto.getNumber() == null))
-            throw new LineBadDataException();*/
 //        Client newClient = clientService.addClient(modelMapper.map(clientDto, Client.class));
         Client newClient = clientService.addClient(Client.from(clientDto));
         userService.addUser(newClient);

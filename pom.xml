@@ -68,6 +68,20 @@
 		</dependency>
 		<!-- /DB -->
 
+		<!-- MongoDB -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<!-- MongoDB -->
+
 		<!-- Segurity -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
