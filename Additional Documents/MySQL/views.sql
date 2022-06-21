@@ -27,7 +27,7 @@ CREATE VIEW v_CallsByClient AS
 DROP VIEW  IF EXISTS v_Calls;
 -- -- --
 CREATE VIEW v_Calls AS
-	SELECT p.id idClient, c.*
+	SELECT p.id AS idClient, c.*
 		FROM calls c
         INNER JOIN phonelines pl
 			ON c.origin_phoneline_id = pl.id
@@ -39,7 +39,7 @@ CREATE VIEW v_Calls AS
 DROP VIEW  IF EXISTS v_Bills;
 -- -- --
 CREATE VIEW v_Bills AS
-	SELECT p.id idClient, b.*
+	SELECT p.id AS idClient, b.*
 		FROM bills b
 		INNER JOIN persons p
 			ON p.dni = b.dni;

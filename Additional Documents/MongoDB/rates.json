@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$oid": "62b174e1d6d2542b70566a17"
+  },
+  "price": 9.2,
+  "starttime": "00:02:00",
+  "endtime": "00:05:00",
+  "origin": {
+    "name": "CABA",
+    "prefix": 11,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  },
+  "destination": {
+    "name": "La Plata",
+    "prefix": 221,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62b174e1d6d2542b70566a18"
+  },
+  "price": 8.3,
+  "starttime": "21:00:00",
+  "endtime": "22:03:00",
+  "origin": {
+    "name": "CABA",
+    "prefix": 11,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  },
+  "destination": {
+    "name": "La Plata",
+    "prefix": 221,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62b174e1d6d2542b70566a19"
+  },
+  "price": 4.4,
+  "starttime": "22:03:00",
+  "endtime": "22:05:00",
+  "origin": {
+    "name": "CABA",
+    "prefix": 11,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  },
+  "destination": {
+    "name": "La Plata",
+    "prefix": 221,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "62b174e1d6d2542b70566a1a"
+  },
+  "price": 4.5,
+  "starttime": "23:55:00",
+  "endtime": "23:59:59",
+  "origin": {
+    "name": "CABA",
+    "prefix": 11,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  },
+  "destination": {
+    "name": "Mar del Plata",
+    "prefix": 223,
+    "province": {
+      "name": "Buenos Aires"
+    }
+  }
+}]

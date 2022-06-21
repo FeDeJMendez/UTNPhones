@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "62ab8494b630cf80d74bbb8b"
+  },
+  "@type": "CLIENT",
+  "name": "Juan",
+  "lastname": "Perez",
+  "dni": 11123456,
+  "phoneline": {
+    "number": "2235583444",
+    "status": true
+  }
+},{
+  "_id": {
+    "$oid": "62ab8494b630cf80d74bbb8c"
+  },
+  "@type": "CLIENT",
+  "name": "Pepe",
+  "lastname": "Juarez",
+  "dni": 22123456,
+  "phoneline": {
+    "number": "2254583444",
+    "status": true
+  }
+},{
+  "_id": {
+    "$oid": "62ab8494b630cf80d74bbb8d"
+  },
+  "@type": "CLIENT",
+  "name": "Martin",
+  "lastname": "Ramirez",
+  "dni": 33123456,
+  "phoneline": {
+    "number": "1147475566",
+    "status": true
+  }
+},{
+  "_id": {
+    "$oid": "62ab8494b630cf80d74bbb8e"
+  },
+  "@type": "CLIENT",
+  "name": "Ramiro",
+  "lastname": "Martinez",
+  "dni": 44123456,
+  "phoneline": {
+    "number": "2215588144",
+    "status": true
+  }
+},{
+  "_id": {
+    "$oid": "62b17230d6d2542b705669fa"
+  },
+  "@type": "BACKOFFICE",
+  "name": "EmpleadoPepe",
+  "lastname": "EmpleadoPerez",
+  "dni": 12323456
+}]

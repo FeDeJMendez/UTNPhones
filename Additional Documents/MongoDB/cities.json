@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a1e"
+  },
+  "name": "CABA",
+  "prefix": 11,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a1f"
+  },
+  "name": "La Plata",
+  "prefix": 221,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a20"
+  },
+  "name": "Mar del Plata",
+  "prefix": 223,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a21"
+  },
+  "name": "Tandil",
+  "prefix": 249,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a22"
+  },
+  "name": "Balcarce",
+  "prefix": 2266,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a23"
+  },
+  "name": "Pinamar",
+  "prefix": 2254,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a24"
+  },
+  "name": "Miramar",
+  "prefix": 2291,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a25"
+  },
+  "name": "Necochea",
+  "prefix": 2262,
+  "province": {
+    "name": "Buenos Aires"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a26"
+  },
+  "name": "Villa Carlos Paz",
+  "prefix": 3541,
+  "province": {
+    "name": "Córdoba"
+  }
+},{
+  "_id": {
+    "$oid": "62b1755cd6d2542b70566a27"
+  },
+  "name": "Córdoba",
+  "prefix": 351,
+  "province": {
+    "name": "Córdoba"
+  }
+}]

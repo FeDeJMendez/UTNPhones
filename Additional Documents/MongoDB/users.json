@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "62b17659d6d2542b70566a2c"
+  },
+  "username": "backoffice1",
+  "password": "1234",
+  "rol": "ROLE_BACKOFFICE",
+  "person": {
+    "_id": {
+      "$oid": "62b17230d6d2542b705669fa"
+    },
+    "@type": "BACKOFFICE",
+    "name": "EmpleadoPepe",
+    "lastname": "EmpleadoPerez",
+    "dni": 12323456
+  }
+},{
+  "_id": {
+    "$oid": "62b17659d6d2542b70566a2d"
+  },
+  "username": "client1",
+  "password": "1234",
+  "rol": "ROLE_CLIENT",
+  "person": {
+    "_id": {
+      "$oid": "62ab8494b630cf80d74bbb8b"
+    },
+    "@type": "CLIENT",
+    "name": "Juan",
+    "lastname": "Perez",
+    "dni": 11123456,
+    "phoneline": {
+      "number": "2235583444",
+      "status": true
+    }
+  }
+}]

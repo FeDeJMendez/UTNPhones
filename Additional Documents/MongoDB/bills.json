@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "62b172d4d6d2542b705669fe"
+  },
+  "dni": 11123456,
+  "number": "2235583444",
+  "totalcalls": 3,
+  "costprice": 902.48,
+  "totalprice": 1092,
+  "datecreation": "2022-06-21",
+  "expiration": "2022-07-06",
+  "paid": false
+},{
+  "_id": {
+    "$oid": "62b172d4d6d2542b705669ff"
+  },
+  "dni": 22123456,
+  "number": "2254583444",
+  "totalcalls": 4,
+  "costprice": 1660.33,
+  "totalprice": 2009,
+  "datecreation": "2022-06-21",
+  "expiration": "2022-07-06",
+  "paid": false
+}]

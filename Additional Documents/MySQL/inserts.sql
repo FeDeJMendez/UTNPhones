@@ -37,8 +37,7 @@ INSERT INTO persons (DTYPE, name, lastname, dni, phoneline_id)
 TRUNCATE TABLE users;
 INSERT INTO users(username, password, rol, person_id) 
 	VALUES ('backoffice1', '1234', 'ROLE_BACKOFFICE', 1), 
-		('client1','1234', 'ROLE_CLIENT',2), 
-        ('infrastructure1','1234', 'ROLE_INFRASTRUCTURE', 0);
+		('client1','1234', 'ROLE_CLIENT',2);
 
 
 TRUNCATE TABLE calls;

@@ -55,7 +55,7 @@ DELIMITER ;
 
 
 
-##### ADD NEW CALL -> Set idBill = 0 and calculate total #####
+##### ADD NEW CALL -> Set idBill = null and calculate total #####
 
 DROP TRIGGER IF EXISTS TBI_NewCall;
 DELIMITER $$
@@ -68,7 +68,7 @@ DELIMITER $$
         DECLARE vIdOriginCity int;
         DECLARE vIdDestinationCity int;
         -- -- -- Set not Bill
-        SET NEW.idBill = 0;
+        SET NEW.idBill = null;
         -- -- -- Get the numbers
         SELECT number INTO vNumberOriginCity 
 			FROM phonelines 
