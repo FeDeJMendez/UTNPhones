@@ -27,6 +27,42 @@ DELIMITER ;
 
 DROP FUNCTION IF EXISTS f_CalculateCallPrice;
 DELIMITER $$
+	CREATE FUNCTION f_CalculateCallPrice (
+		vCallStartTime datetime, 
+        vDuration int, 
+        vIdCityOrigin int, 
+        vIdCityDestination int
+	)
+	RETURNS double(8,2) READS SQL DATA
+BEGIN
+	DECLARE vTotal double(8,2) default 0.0;
+	DECLARE vPrice double(8,2) default 0.0;
+    DECLARE vIdRate int default 0;
+    -- -- --
+    SELECT id, price 
+		INTO vIdRate, vPrice 
+        FROM rates 
+			WHERE TIME(vCallStartTime) >= starttime 
+				AND TIME(vCallStartTime) <= endtime 
+                AND origin_city_id = vIdCityOrigin 
+                AND destination_city_id = vIdCityDestination;
+	-- -- --
+	IF vIdRate = 0 THEN
+		SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'THERE IS NOT RATE ASSOCIATED FOR THE TIME OF THE CALL.',
+			mysql_errno = '3';
+    END IF;
+    -- -- --
+    SELECT vPrice * vDuration 
+		INTO vTotal;
+	RETURN vTotal;
+END;
+$$
+DELIMITER ;
+
+/*
+DROP FUNCTION IF EXISTS f_CalculateCallPrice;
+DELIMITER $$
 CREATE FUNCTION f_CalculateCallPrice (
 		vStartTime datetime,
         vDuration int,
@@ -88,7 +124,7 @@ BEGIN
 END;
 $$
 DELIMITER ;
-
+*/
 
 
 

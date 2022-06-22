@@ -9,7 +9,36 @@
   "totalprice": 1092,
   "datecreation": "2022-06-21",
   "expiration": "2022-07-06",
-  "paid": false
+  "paid": false,
+  "calls": [
+    {
+      "starttime": "16/02/2018 15:00:00",
+      "duration": 52,
+      "total": {
+        "$numberDecimal": "364.00"
+      },
+      "originNumber": "2235583444",
+      "destinationNumber": "1147475566"
+    },
+    {
+      "starttime": "16/02/2018 15:00:00",
+      "duration": 52,
+      "total": {
+        "$numberDecimal": "364.00"
+      },
+      "originNumber": "2235583444",
+      "destinationNumber": "1147475566"
+    },
+    {
+      "starttime": "16/02/2018 15:00:00",
+      "duration": 52,
+      "total": {
+        "$numberDecimal": "364.00"
+      },
+      "originNumber": "2235583444",
+      "destinationNumber": "1147475566"
+    }
+  ]
 },{
   "_id": {
     "$oid": "62b172d4d6d2542b705669ff"
@@ -21,5 +50,43 @@
   "totalprice": 2009,
   "datecreation": "2022-06-21",
   "expiration": "2022-07-06",
-  "paid": false
+  "paid": false,
+  "calls": [
+    {
+      "starttime": "06/02/2018 15:00:00",
+      "duration": 59,
+      "total": {
+        "$numberDecimal": "413.00"
+      },
+      "originNumber": "2254583444",
+      "destinationNumber": "2215588144"
+    },
+    {
+      "starttime": "06/02/2018 15:00:00",
+      "duration": 59,
+      "total": {
+        "$numberDecimal": "413.00"
+      },
+      "originNumber": "2254583444",
+      "destinationNumber": "2215588144"
+    },
+    {
+      "starttime": "06/02/2018 15:00:00",
+      "duration": 59,
+      "total": {
+        "$numberDecimal": "413.00"
+      },
+      "originNumber": "2254583444",
+      "destinationNumber": "2215588144"
+    },
+    {
+      "starttime": "20/02/2018 15:00:00",
+      "duration": 110,
+      "total": {
+        "$numberDecimal": "770.00"
+      },
+      "originNumber": "2254583444",
+      "destinationNumber": "1147475566"
+    }
+  ]
 }]

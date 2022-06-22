@@ -61,7 +61,7 @@ DELIMITER ;
 
 
 
-##### Return the Calls of a Client BY Date using the view v_CallsByClient #####
+##### Return the Calls of a Client By Date using the view v_CallsByClient #####
 
 DROP PROCEDURE IF EXISTS p_CallsByClientAndDate;
 DELIMITER $$

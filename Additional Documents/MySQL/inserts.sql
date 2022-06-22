@@ -40,11 +40,16 @@ INSERT INTO users(username, password, rol, person_id)
 		('client1','1234', 'ROLE_CLIENT',2);
 
 
+
 TRUNCATE TABLE calls;
 INSERT INTO calls (starttime, duration, origin_phoneline_id, destination_phoneline_id) 
 	VALUES ('2022-03-10 12:00:00', 8, 1, 2), ('2022-03-11 12:10:00', 15, 2, 4), ('2022-03-11 15:05:00', 6, 3, 4);
+
+INSERT INTO rates(price, starttime, endtime, origin_city_id, destination_city_id)
+	VALUES (9.2, '11:00:00', '13:00:00', 3, 6);
     
-select COUNT(*) from calls;
+SELECT COUNT(*) FROM calls;
+SELECT * FROM calls;
 
 INSERT INTO calls (starttime, duration, origin_phoneline_id, destination_phoneline_id) 
 	VALUES ('2022-03-10 12:00:00', 8, 1, 2), ('2022-03-11 12:10:00', 15, 2, 4), ('2022-03-11 15:05:00', 6, 3, 4),

@@ -62,7 +62,7 @@ DELIMITER $$
 	CREATE TRIGGER TBI_NewCall
 		BEFORE INSERT ON calls FOR EACH ROW
 	BEGIN
-		DECLARE vTotal int;
+		DECLARE vTotal double(8,2);
         DECLARE vNumberOriginCity varchar(10);
         DECLARE vNumberDestinationCity varchar(10);
         DECLARE vIdOriginCity int;
